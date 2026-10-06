@@ -33,7 +33,7 @@ const booking = await client.Booking().load({ id: 'booking_uid' })
 console.log(booking)
 ```
 
-Create an API key in Cal.com under Settings, then Developer, then API keys.
+Get your API key at [app.cal.com/settings/developer/api-keys](https://app.cal.com/settings/developer/api-keys).
 `cal-api-version` depends on the resource: `2024-08-13` for bookings,
 `2024-06-11` for schedules, `2024-06-14` for event types.
 

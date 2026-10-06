@@ -98,35 +98,3 @@ by reading a generated file, and the failing test did not point to it.
 
 Suggestion: if most calls in an API use the same wrapper, unwrap all of them.
 
-### 4. The generated docs have gaps
-
-- The tutorial in the generated README goes from step 1 straight to step 3.
-- The install instructions link to `github.com/voxgig-sdk/cal-sdk`, a repository that does not
-  exist. The generator assumes the SDK lives in Voxgig's GitHub account and never asked for mine.
-
-### 5. Nothing tells you how to pass your API key
-
-This one came from calling the real API. The generated quickstart creates a client with
-`new CalSDK()` and never mentions a key, so my first call returned 401 Unauthorized. What works
-is passing the headers yourself:
-
-```ts
-const client = new CalSDK({
-  headers: {
-    Authorization: `Bearer ${process.env.CAL_API_KEY}`,
-    'cal-api-version': '2024-08-13',
-  },
-})
-```
-
-With that, loading my profile, schedules, event types and bookings all returned real data.
-
-Suggestion: show how to authenticate in the generated quickstart. It is the first thing every
-new user needs.
-
-## What worked well
-
-- It is fast. Generating the whole SDK takes seconds.
-- Once the key was set, the SDK worked against the real Cal.com API on the first try.
-- The SDK comes with tests that run without a network or an API key, and they caught issue 3.
-- My changes to the mapping file survived every regeneration.
