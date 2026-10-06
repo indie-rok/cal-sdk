@@ -4,143 +4,111 @@ Author: Emmanuel Orozco. Date: 2026-10-06.
 
 ## What I built
 
-An SDK for the [Cal.com API v2](https://cal.com/docs/api-reference/v2/introduction), generated from
-Cal.com's public OpenAPI 3.0 spec (82 paths, 121 operations) with `@voxgig/sdkgen` 4.34.1.
-I generated TypeScript and Python first, then dropped Python (`voxgig-sdkgen target remove py`)
-to keep the repo small. The published SDK is TypeScript only, with the `test` feature.
+An SDK for the [Cal.com API v2](https://cal.com/docs/api-reference/v2/introduction) (I've been using this API a lot for personal projects lately), generated from
+Cal.com's public OpenAPI  with `@voxgig/sdkgen` 4.34.1.
+I generated only  TypeScript for simplicity.
 
 ## How I used AI
 
-I directed AI agents (Claude Code, with a Codex worker for the entity mapping). I chose the API,
-set the goals (clean entity names, a short README, TypeScript only), read the README as a new
-developer would and sent corrections. Each change was checked by regenerating, running the
-generated test suite and `voxgig-sdkgen doctor`, and finally by calling the live Cal.com API
-with my own account.
-
-## Result
-
-| | Entities | Pass | Fail | Skipped |
-|---|---|---|---|---|
-| Out of the box, TypeScript | 63 | 544 | 12 | 68 |
-| Out of the box, Python | 63 | 396 | 4 | 147 |
-| After shaping, TypeScript | 23 | 443 | 0 | 31 |
-| After shaping, Python | 23 | 302 | 0 | 110 |
-
-All 121 operations are still mapped. `voxgig-sdkgen doctor` reports no drift.
-
-From an empty folder to generated, compiling SDKs took about two minutes of machine time, and
-generation itself about six seconds. Getting to the out-of-the-box rows fits the 30-minute box.
-The shaping did not: it is about 700 lines of `guide.aontu`, and I went past the time-box on
-purpose to see how far the customisation layer goes.
-
-The numbers above are from the offline test suites. I also ran the TypeScript SDK against the
-live Cal.com API with my own account, read-only: `Me().load()`, `Schedule().list()`,
-`EventType().list()`, `Booking().list()` (96 bookings), `Booking().load()` and a `direct()` call
-all returned real data. A call without a key returned 401, as expected.
+I directed AI agents (Claude Fable orchestrator, with a gpt-sol worker for the entity mapping). I chose the API,
+set the goals (clean entity names, a short README, TypeScript only), read (and updated) the README as a new
+developer would and sent corrections to make it easier to understand and find the docs (add link to docs) and finally by calling the live Cal.com API with my own account.
 
 ## What I changed
 
-1. **Bumped `@voxgig/apidef` in `.sdk/package.json`** from `~8.22.1` to `~8.23.0` (issue 1).
-2. **Added `servers`, a title and a description to the spec copy in `.sdk/def/`.** Cal.com's spec
-   has no `servers` block, so the client had `base: "{base}"` and the README told users to pass
-   `'<base>'`. Its title is also "Cal.diy API v2".
-3. **Reshaped 63 entities into 23 in `guide.aontu`** (issue 2): moved each path from a DTO-named
-   entity to a domain entity (`active: false` on the old one, redeclared under the new one),
-   added `body.data` unwrapping where it was missing (issue 3), and added actions to tell apart
-   paths that shared a selector.
-4. **Added entity descriptions** through `info.entity_desc` in `project.aontu`. I found this key
-   by reading `ReadmeTop.js` in `node_modules`; it is not documented. Multi-line strings are
-   rejected ("unprintable character"), so longer text has to be one escaped line.
-5. **Rewrote the root README by hand and added a `docs/` folder.** The generated README has 15
-   sections and no switches to drop any, and I wanted a short entry point: install, one
-   quickstart, one entity call, one direct call, and links. The rest moved to
-   `docs/entities.md`, `docs/direct.md` and `docs/advanced.md`. This is the one place where I
-   edited generated output, so `npm run generate` overwrites it and I restore it from git.
-6. **Deleted 54 orphan files in `.sdk/model/flow/`** left behind by the reshaping (issue 9).
+1. **Fixed the install.** The first command failed (issue 1). I changed one version number in
+   `.sdk/package.json` and ran `npm install` again. No new dependency was added.
+2. **Renamed the objects the SDK exposes** (issue 2). The AI wrote a mapping file,
+   `.sdk/model/guide/guide.aontu`, that turns 63 hard-to-read names into 23 clear ones such as
+   `Booking` and `Schedule`.
+3. **Rewrote the root README by hand and added a `docs/` folder.** The generated README felt too
+   convoluted, so I kept only the getting-started info and linked the rest from `docs/`.
 
-## Issues, in the order I hit them
+## Issues
 
-### 1. The very first command fails (blocker)
+### 1. The first command fails
 
-`npm create @voxgig/sdkgen -- cal -d ./cal-openapi.json -o ./cal-sdk` exits with
-`ERESOLVE`: the scaffold pins `@voxgig/apidef@~8.22.1`, but `@voxgig/sdkgen@4.34.1` has a peer
-dependency on `@voxgig/apidef@>=8.23.0`. The scaffold files are written, but `npm install` fails,
-so a new user is stopped at step 1 with an npm error that says nothing about Voxgig.
+I ran the create command with my API spec file:
 
-Suggestion: a CI job that runs `npm create` against the published packages on every release of
-`sdkgen` or `apidef`.
+```bash
+npm create @voxgig/sdkgen@latest cal -- --def cal-openapi.json
+```
 
-### 2. Entities are named after response DTOs, not domain concepts
+It stopped with an npm `ERESOLVE` error. The project it creates asks for version `8.22.1` of
+`@voxgig/apidef`, but the generator itself needs `8.23.0` or newer, so npm refuses to install.
+The error is pure npm output and never mentions Voxgig, so as a new user I had no idea what
+went wrong.
 
-The pitch is "semantic entities instead of URL paths". For this spec I got 63 entities, and most
-are named after response schemas: `AddAttendeeOutput20240813`,
-`StripCredentialsCheckOutputResponseDto`, `OAuthClientWebhooksOutputResponseDto`. There are also
-entities called `men`, `default`, `request` and `refresh`. A Cal.com user would expect about ten:
-booking, event type, schedule, slot, calendar, webhook, and so on.
+What I did: opened `.sdk/package.json`, changed `"@voxgig/apidef": "~8.22.1"` to `"~8.23.0"`,
+and ran `npm install` inside `.sdk/`. After that everything worked.
 
-The generated README then leads with the worst one: its first example is
-`client.AddAttendeeOutput20240813()`, because it is first alphabetically. After shaping it leads with `client.ApiKey().create()`,
-which is cleaner but still not what a new user wants first; I found no setting to pick the
-featured entity.
+Two suggestions. Test the create command against the published packages before each release.
+And make the first command shorter: needing `--` and `--def` on the very first step is a lot
+for a beginner. A prompt that asks "where is your OpenAPI file?" would be friendlier.
 
-I fixed the names by hand in `guide.aontu` (23 entities now), but it took about 700 lines.
+### 2. The names in the generated SDK are hard to read
 
-Suggestion: strip `Output`, `ResponseDto` and date suffixes before naming, and fold
-`/bookings/{id}/attendees` into `booking` as an action. When the entity count is close to the
-path count, print a warning that the model needs shaping and link to the guide docs.
+The SDK gives you one object per "thing" in the API, and you call methods on it. The generator
+calls these objects entities. For Cal.com I expected to write this:
 
-### 3. The `{ status, data }` envelope is unwrapped inconsistently
+```ts
+client.Booking().load({ id })
+```
 
-Cal.com wraps every response in `{ status, data }`. The generator detected this for list and
-some create operations (`transform: res: body.data` in `base-guide.aontu`) but not for
-`booking.load`, `schedule.load` and others. The `booking` entity's fields ended up being
-`status`, `data`, `pagination` and `error` instead of the booking's own fields.
+Out of the box I got 63 objects, with names like these:
 
-The fix is one line per operation in `guide.aontu`, and it worked first time. But I only found
-it by reading `base-guide.aontu`; the test failure ("the entity does not hold the record the
-definition example returns") does not point there.
+```ts
+client.AddAttendeeOutput20240813()
+client.StripCredentialsCheckOutputResponseDto()
+client.Men()
+```
 
-Suggestion: if most operations in an API use the same envelope, apply it to all of them and log
-it. Make that test failure message name the `transform: res` setting.
+The names are copied from internal labels in Cal.com's spec, not from what a developer would
+call them. The generated README even uses `AddAttendeeOutput20240813` as its first example.
 
-### 4. Generated docs have visible gaps
+What I did: the generator lets you correct the names in a mapping file. I asked the AI to write
+it, and the SDK now has 23 objects with names like `Booking`, `EventType`, `Schedule` and
+`Webhook`. It works, but the file is about 700 lines, which is a lot of work to get readable
+names.
 
-- The README tutorial goes from step 1 to step 3. Step 2 is missing.
-- Out of the box, README and REFERENCE examples fail their own tests in both languages (for example
-  `list` on `CalUnifiedCalendar` is missing `calendar_id`).
-- Install instructions point to `github.com/voxgig-sdk/cal-sdk`, a repo that does not exist.
-  `origin: 'voxgig-sdk'` is set in `sdk.aontu`, which is not one of the files marked as mine.
-  The scaffold should ask for the owner, or read it from `git remote`.
+Suggestion: clean the names automatically (drop endings like `Output`, `ResponseDto` and
+dates), and warn when the result still looks like internal labels.
 
-### 5. The scaffold warns about its own defaults
+### 3. Some calls return the wrapper, not the data
 
-Every command prints: `.sdk/.gitignore ignores log/ ... Delete the log/ line`. That `.gitignore`
-was written by the scaffold seconds earlier. Either the scaffold should not write the line, or
-the warning should go.
+Cal.com wraps every answer like this:
 
-### 6. Warnings are easy to miss
+```json
+{ "status": "success", "data": { "title": "15 Min Meeting", "start": "..." } }
+```
 
-`PARTIAL BUILD! There were 3 warnings` and a long `flow-step-unreachable` line (35 test steps
-switched off) scroll past in several hundred lines of INFO output. 68 TypeScript and 147 Python
-tests are skipped, and I only noticed by reading the totals.
+When I load a booking I want the booking, so `booking.title`. The generator handled this for
+some calls but not for others. For those, I got the wrapper back, and the booking's fields were
+`status` and `data` where I expected `title` and `start`.
 
-Suggestion: end `npm run generate` with a short summary: entities, operations, warnings, tests
-switched off, and the one next action.
+What I did: added one line per affected call to the mapping file, telling the generator that
+the real record is inside `data`:
 
-### 7. Smaller things
+```
+guide: entity: booking: path: "/v2/bookings/{bookingUid}": op: load: transform: res: "`body.data`"
+```
 
-- `voxgig-sdkgen doctor` must be run from inside `.sdk/`. From the repo root it crashes with a
-  raw `ENOENT ./model/sdk.aontu` stack trace.
-- The model files use `.aontu`. I found no link from the scaffold or the docs page to a syntax
-  reference, so I copied the syntax from `base-guide.aontu`.
-- The docs landing page says `npm create @voxgig/sdkgen` (interactive); the non-interactive
-  flags `-d` and `-o` are only on the agents page.
+It worked the first time. The hard part was finding out that this line exists: I only found it
+by reading a generated file, and the failing test did not point to it.
 
-### 8. Auth is not generated or documented
+Suggestion: if most calls in an API use the same wrapper, unwrap all of them.
 
-Cal.com's spec has no `securitySchemes`; it lists `Authorization` and `cal-api-version` as plain
-header parameters. The generator produced no auth setup, and none of the generated docs show how
-to pass a key. In the live test, a default client got 401. What works is the `headers` option:
+### 4. The generated docs have gaps
+
+- The tutorial in the generated README goes from step 1 straight to step 3.
+- The install instructions link to `github.com/voxgig-sdk/cal-sdk`, a repository that does not
+  exist. The generator assumes the SDK lives in Voxgig's GitHub account and never asked for mine.
+
+### 5. Nothing tells you how to pass your API key
+
+This one came from calling the real API. The generated quickstart creates a client with
+`new CalSDK()` and never mentions a key, so my first call returned 401 Unauthorized. What works
+is passing the headers yourself:
 
 ```ts
 const client = new CalSDK({
@@ -151,42 +119,14 @@ const client = new CalSDK({
 })
 ```
 
-Cal.com also expects a different `cal-api-version` per resource (`2024-08-13` for bookings,
-`2024-06-11` for schedules, `2024-06-14` for event types). The SDK leaves that to the caller, so
-in practice you need one client per resource type.
+With that, loading my profile, schedules, event types and bookings all returned real data.
 
-Suggestion: when a spec has an `Authorization` header parameter on every operation, treat it as
-auth and document it in the quickstart. Let the guide set a default header per entity.
-
-### 9. Things that only showed up while shaping
-
-- **Orphan flow files.** When an entity disappears, its entity model and target files are pruned
-  but `.sdk/model/flow/Basic<Old>Flow.aontu` is not. `doctor` then exits non-zero, its summary
-  line says "0 forked, 0 edited, 0 stale, 0 missing", and it suggests `target add`, which does
-  not fix it. I deleted the 54 files by hand.
-- **Stale warnings file.** `.sdk/apidef-warnings.txt` is not cleared by a successful generate.
-- **Path and query parameters can collide.** The path parameter `calendar` and the query
-  parameter `calendarId` both became `calendar_id`; the optional one won, so examples omitted a
-  required value. Fixed by renaming the path parameter in the guide.
-- **Generated test flows assume the key is `id`.** Flows pass `id` even when the mapping needs
-  `attendee_id` or `webhook_id`, so nested entities fail until the keys are normalised.
-- **Union responses lose their fields.** `booking`, `private_link` and `slot` return unions and
-  end up with thin record types. Create inputs can also require response-only fields such as
-  `id`. I found no way to fix either from the guide.
-- **Seven generated flow steps are still switched off** (calendar, conferencing, verified email
-  and phone), because the generic flow does not supply the action those routes need.
+Suggestion: show how to authenticate in the generated quickstart. It is the first thing every
+new user needs.
 
 ## What worked well
 
-- The pipeline is fast and deterministic. Regenerating after a model change takes seconds.
-- Customisation survives regeneration. My `guide.aontu` and spec changes were kept, and `doctor`
-  confirmed no drift.
-- The generated SDK worked against the live API on the first try once the headers were set.
-- The offline tests are a real feature. They found the envelope problem without an API key.
-- Warnings, when I did read them, were specific and told me which file to edit.
-
-## If I had more time
-
-Set the API key and the per-resource `cal-api-version` header inside the SDK so the caller sets
-a key once, fix the union-typed records, move my README into the generator so it survives
-regeneration, and test the write operations (create, cancel, reschedule) on a test account.
+- It is fast. Generating the whole SDK takes seconds.
+- Once the key was set, the SDK worked against the real Cal.com API on the first try.
+- The SDK comes with tests that run without a network or an API key, and they caught issue 3.
+- My changes to the mapping file survived every regeneration.
