@@ -6,13 +6,9 @@ Learn more about Voxgig SDKs at [voxgig.com/sdk](https://voxgig.com/sdk/).
 
 ## About
 
-Cal.com is open-source scheduling infrastructure. Its v2 REST API has 121
-operations across 82 URL paths. This SDK lets you work with objects such as
-`Booking`, `EventType` and `Schedule` instead of writing those HTTP calls by hand.
+Cal.com is open-source scheduling infrastructure. 
 
 ## Install
-
-The package is not published to npm yet. Install it from a clone:
 
 ```bash
 git clone https://github.com/indie-rok/cal-sdk
@@ -26,11 +22,20 @@ Get the details of one booking:
 ```ts
 import { CalSDK } from '@voxgig-sdk/cal-sdk'
 
-const client = new CalSDK()
+const client = new CalSDK({
+  headers: {
+    Authorization: `Bearer ${process.env.CAL_API_KEY}`,
+    'cal-api-version': '2024-08-13',
+  },
+})
 
 const booking = await client.Booking().load({ id: 'booking_uid' })
 console.log(booking)
 ```
+
+Create an API key in Cal.com under Settings, then Developer, then API keys.
+`cal-api-version` depends on the resource: `2024-08-13` for bookings,
+`2024-06-11` for schedules, `2024-06-14` for event types.
 
 ## Entities
 
