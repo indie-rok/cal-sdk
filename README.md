@@ -34,8 +34,6 @@ console.log(booking)
 ```
 
 Get your API key at [app.cal.com/settings/developer/api-keys](https://app.cal.com/settings/developer/api-keys).
-`cal-api-version` depends on the resource: `2024-08-13` for bookings,
-`2024-06-11` for schedules, `2024-06-14` for event types.
 
 ## Entities
 
