@@ -1,0 +1,27 @@
+# BasicSelectedCalendarFlow
+
+main: kit: flow: BasicSelectedCalendarFlow:
+{
+  entity: "selected_calendar",
+  kind: "basic",
+  name: "BasicSelectedCalendarFlow",
+  step: [
+    {
+      i: {
+        ref: "selected_calendar_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "selected_calendar_ref01",
+        suffix: "_rm0"
+      }
+
+      o: "remove"
+    }
+  ],
+  "key$": "BasicSelectedCalendarFlow"
+}

@@ -1,0 +1,89 @@
+{
+  "existing": {
+    "schedule": {
+      "SCHEDULE00": {
+        "availability": [],
+        "data": "s65",
+        "error": {},
+        "id": "SCHEDULE00",
+        "isDefault": true,
+        "name": "s69",
+        "overrides": [],
+        "ownerId": 107,
+        "status": "s6c",
+        "timeZone": "s6d"
+      },
+      "SCHEDULE01": {
+        "availability": [],
+        "data": "sc9",
+        "error": {},
+        "id": "SCHEDULE01",
+        "isDefault": true,
+        "name": "scd",
+        "overrides": [],
+        "ownerId": 207,
+        "status": "sd0",
+        "timeZone": "sd1"
+      },
+      "SCHEDULE02": {
+        "availability": [],
+        "data": "s12d",
+        "error": {},
+        "id": "SCHEDULE02",
+        "isDefault": true,
+        "name": "s131",
+        "overrides": [],
+        "ownerId": 307,
+        "status": "s134",
+        "timeZone": "s135"
+      }
+    }
+  },
+  "new": {
+    "schedule": {
+      "schedule_ref01": {
+        "availability": [],
+        "data": "s191",
+        "error": {},
+        "isDefault": true,
+        "name": "s195",
+        "overrides": [],
+        "ownerId": 407,
+        "status": "s198",
+        "timeZone": "s199"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/schedules": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/schedules": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/schedules/{scheduleId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/schedules/default": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/schedules/{scheduleId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/schedules/{scheduleId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

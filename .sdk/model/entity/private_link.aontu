@@ -1,0 +1,356 @@
+# Entity: private_link
+
+main: kit: entity: private_link: {
+
+  alias: field: {}
+
+  fields: {
+    data: {
+      h: "Data"
+      n: "data"
+      r: true
+      sh: "Array of private links for the event type (mix of time-based and usage-based)"
+      t: "`$ARRAY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 1
+      }
+    }
+    expiresAt: {
+      fo: "date-time"
+      h: "Expires At"
+      n: "expiresAt"
+      r: false
+      sh: "Expiration date for time-based links"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    maxUsageCount: {
+      h: "Max Usage Count"
+      n: "maxUsageCount"
+      r: false
+      sh: "Maximum number of times the link can be used."
+      t: "`$NUMBER`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      sh: "Response status"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "private_link"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/event-types/{eventTypeId}/private-links"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "event_type_id"
+                or: "eventTypeId"
+                r: true
+                t: "`$NUMBER`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/event-types/{eventTypeId}/private-links"
+          q: {
+            exist: [
+              "authorization"
+              "event_type_id"
+            ]
+          }
+          r: {
+            param: {
+              eventTypeId: "event_type_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "event-types"
+            }
+            {
+              var: "event_type_id"
+            }
+            {
+              lit: "private-links"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/event-types/{eventTypeId}/private-links"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "event_type_id"
+                or: "eventTypeId"
+                r: true
+                t: "`$NUMBER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/event-types/{eventTypeId}/private-links"
+          q: {
+            exist: [
+              "authorization"
+              "event_type_id"
+            ]
+          }
+          r: {
+            param: {
+              eventTypeId: "event_type_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "event-types"
+            }
+            {
+              var: "event_type_id"
+            }
+            {
+              lit: "private-links"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v2/event-types/{eventTypeId}/private-links/{linkId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "event_type_id"
+                or: "eventTypeId"
+                r: true
+                t: "`$NUMBER`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "linkId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v2/event-types/{eventTypeId}/private-links/{linkId}"
+          q: {
+            exist: [
+              "authorization"
+              "event_type_id"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              eventTypeId: "event_type_id"
+              linkId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "event-types"
+            }
+            {
+              var: "event_type_id"
+            }
+            {
+              lit: "private-links"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /v2/event-types/{eventTypeId}/private-links/{linkId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "event_type_id"
+                or: "eventTypeId"
+                r: true
+                t: "`$NUMBER`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "linkId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/event-types/{eventTypeId}/private-links/{linkId}"
+          q: {
+            exist: [
+              "authorization"
+              "event_type_id"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              eventTypeId: "event_type_id"
+              linkId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "event-types"
+            }
+            {
+              var: "event_type_id"
+            }
+            {
+              lit: "private-links"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.event_type")]
+  ]
+
+}

@@ -1,0 +1,846 @@
+# Entity: calendar
+
+main: kit: entity: calendar: {
+
+  alias: field: {}
+
+  fields: {
+    connectedCalendars: {
+      h: "Connected Calendars"
+      n: "connectedCalendars"
+      r: true
+      t: "`$ARRAY`"
+    }
+    destinationCalendar: {
+      h: "Destination Calendar"
+      n: "destinationCalendar"
+      r: true
+      t: "`$OBJECT`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "calendar"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/calendars/{calendar}/credentials"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "calendar"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/calendars/{calendar}/credentials"
+          q: {
+            "$action": "credential"
+            exist: [
+              "authorization"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              calendar: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "credentials"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v2/calendars/{calendar}/disconnect"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "calendar_id"
+                or: "calendar"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/calendars/{calendar}/disconnect"
+          q: {
+            "$action": "disconnect"
+            exist: [
+              "authorization"
+              "calendar_id"
+            ]
+          }
+          r: {
+            param: {
+              calendar: "calendar_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              var: "calendar_id"
+            }
+            {
+              lit: "disconnect"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v2/calendars/ics-feed/save"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/calendars/ics-feed/save"
+          q: {
+            "$action": "save_ics_feed"
+            exist: [
+              "authorization"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              lit: "ics-feed"
+            }
+            {
+              lit: "save"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/calendars/{calendar}/freebusy"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "calendar_id"
+                or: "calendar"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "2026-03-10"
+                k: "query"
+                n: "from"
+                or: "from"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "time_zone"
+                or: "timeZone"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2026-03-10"
+                k: "query"
+                n: "to"
+                or: "to"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/calendars/{calendar}/freebusy"
+          q: {
+            "$action": "freebusy"
+            exist: [
+              "authorization"
+              "calendar_id"
+              "from"
+              "to"
+            ]
+          }
+          r: {
+            param: {
+              calendar: "calendar_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              var: "calendar_id"
+            }
+            {
+              lit: "freebusy"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/calendars/connections/{connectionId}/freebusy"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "connection_id"
+                or: "connectionId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "2026-03-10"
+                k: "query"
+                n: "from"
+                or: "from"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "time_zone"
+                or: "timeZone"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2026-03-10"
+                k: "query"
+                n: "to"
+                or: "to"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/calendars/connections/{connectionId}/freebusy"
+          q: {
+            "$action": "freebusy"
+            exist: [
+              "authorization"
+              "connection_id"
+              "from"
+              "to"
+            ]
+          }
+          r: {
+            param: {
+              connectionId: "connection_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              lit: "connections"
+            }
+            {
+              var: "connection_id"
+            }
+            {
+              lit: "freebusy"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/calendars/busy-times"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "credential_id"
+                or: "credentialId"
+                r: true
+                t: "`$NUMBER`"
+              }
+              {
+                ex: "2023-10-01"
+                k: "query"
+                n: "date_from"
+                or: "dateFrom"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2023-10-31"
+                k: "query"
+                n: "date_to"
+                or: "dateTo"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "external_id"
+                or: "externalId"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "America/New_York"
+                k: "query"
+                n: "logged_in_users_tz"
+                or: "loggedInUsersTz"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "America/New_York"
+                k: "query"
+                n: "time_zone"
+                or: "timeZone"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/calendars/busy-times"
+          q: {
+            "$action": "busy_times"
+            exist: [
+              "authorization"
+              "credential_id"
+              "external_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              lit: "busy-times"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/calendars/{calendar}/connect"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "calendar"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "is_dry_run"
+                or: "isDryRun"
+                r: true
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "redir"
+                or: "redir"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/calendars/{calendar}/connect"
+          q: {
+            "$action": "connect"
+            exist: [
+              "authorization"
+              "id"
+              "is_dry_run"
+            ]
+          }
+          r: {
+            param: {
+              calendar: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "connect"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/calendars/{calendar}/save"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "calendar"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "code"
+                or: "code"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "state"
+                or: "state"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/calendars/{calendar}/save"
+          q: {
+            "$action": "save"
+            exist: [
+              "code"
+              "id"
+              "state"
+            ]
+          }
+          r: {
+            param: {
+              calendar: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "save"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/calendars/{calendar}/check"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "calendar"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/calendars/{calendar}/check"
+          q: {
+            "$action": "check"
+            exist: [
+              "authorization"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              calendar: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "check"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/calendars"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/calendars"
+          q: {
+            exist: [
+              "authorization"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/calendars/ics-feed/check"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/calendars/ics-feed/check"
+          q: {
+            "$action": "check_ics_feed"
+            exist: [
+              "authorization"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              lit: "ics-feed"
+            }
+            {
+              lit: "check"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/calendars/connections"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/calendars/connections"
+          q: {
+            "$action": "connections"
+            exist: [
+              "authorization"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              lit: "connections"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

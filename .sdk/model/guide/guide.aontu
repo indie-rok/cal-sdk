@@ -1,0 +1,741 @@
+# Guide
+
+@"@voxgig/apidef/model/guide.aontu"
+
+@"./base-guide.aontu"
+
+
+
+
+# Cal.com wraps every response in { status, data }. The generator unwraps
+# list responses on its own but not these loads, so the entity never held
+# the record. Unwrap them by hand.
+guide: entity: booking: path: "/v2/bookings/{bookingUid}": op: load: transform: res: "`body.data`"
+guide: entity: schedule: path: "/v2/schedules/{scheduleId}": op: load: transform: res: "`body.data`"
+
+# The generator split bookings across DTO-named entities. Fold confirm and
+# decline back into booking as actions.
+guide: entity: booking_output_2024_08_13: path: "/v2/bookings/{bookingUid}/confirm": active: false
+guide: entity: booking_output_2024_08_13: path: "/v2/bookings/{bookingUid}/decline": active: false
+guide: entity: booking: path: "/v2/bookings/{bookingUid}/confirm": {
+  action: "confirm": {}
+  rename: param: "bookingUid": "id"
+  op: create: method: "POST"
+}
+guide: entity: booking: path: "/v2/bookings/{bookingUid}/decline": {
+  action: "decline": {}
+  rename: param: "bookingUid": "id"
+  op: create: method: "POST"
+}
+
+
+# Domain entities for Cal.com API v2. Keep the original wire URLs.
+# Disable every moved path share and each emptied response-DTO entity.
+guide: entity: add_attendee_output_2024_08_13: path: "/v2/bookings/{bookingUid}/attendees": active: false
+guide: entity: add_guests_output_2024_08_13: path: "/v2/bookings/{bookingUid}/guests": active: false
+guide: entity: booking_attendee_output_2024_08_13: path: "/v2/bookings/{bookingUid}/attendees/{attendeeId}": active: false
+guide: entity: booking_attendees_output_2024_08_13: path: "/v2/bookings/{bookingUid}/attendees": active: false
+guide: entity: booking_output_2024_08_13: path: "/v2/bookings/by-seat/{seatUid}": active: false
+guide: entity: booking_output_2024_08_13: path: "/v2/bookings/{bookingUid}/confirm": active: false
+guide: entity: booking_output_2024_08_13: path: "/v2/bookings/{bookingUid}/decline": active: false
+guide: entity: booking_recordings_output: path: "/v2/bookings/{bookingUid}/recordings": active: false
+guide: entity: booking_references_output_2024_08_13: path: "/v2/bookings/{bookingUid}/references": active: false
+guide: entity: booking_transcripts_output: path: "/v2/bookings/{bookingUid}/transcripts": active: false
+guide: entity: booking_video_sessions_output: path: "/v2/bookings/{bookingUid}/conferencing-sessions": active: false
+guide: entity: busy_time: path: "/v2/calendars/busy-times": active: false
+guide: entity: cal_unified_calendar: path: "/v2/calendars/connections/{connectionId}/events/{eventId}": active: false
+guide: entity: cal_unified_calendar: path: "/v2/calendars/{calendar}/events/{eventUid}": active: false
+guide: entity: calendar_link: path: "/v2/bookings/{bookingUid}/calendar-links": active: false
+guide: entity: conferencing_app_output_response_dto: path: "/v2/conferencing": active: false
+guide: entity: conferencing_app_output_response_dto: path: "/v2/conferencing/{app}/connect": active: false
+guide: entity: conferencing_apps_oauth_url_response_dto: path: "/v2/conferencing/{app}/oauth/auth-url": active: false
+guide: entity: connected_calendars_output: path: "/v2/calendars": active: false
+guide: entity: create_ics_feed_output_response_dto: path: "/v2/calendars/ics-feed/save": active: false
+guide: entity: create_managed_user_output: path: "/v2/oauth-clients/{clientId}/users": active: false
+guide: entity: create_private_link_output: path: "/v2/event-types/{eventTypeId}/private-links": active: false
+guide: entity: default: path: "/v2/conferencing/default": active: false
+guide: entity: default: path: "/v2/schedules/default": active: false
+guide: entity: deleted_calendar_credentials_output_response_dto: path: "/v2/calendars/{calendar}/disconnect": active: false
+guide: entity: disconnect: path: "/v2/conferencing/{app}/disconnect": active: false
+guide: entity: event_type_webhook_output_response_dto: path: "/v2/event-types/{eventTypeId}/webhooks": active: false
+guide: entity: event_type_webhook_output_response_dto: path: "/v2/event-types/{eventTypeId}/webhooks/{webhookId}": active: false
+guide: entity: event_type_webhooks_output_response_dto: path: "/v2/event-types/{eventTypeId}/webhooks": active: false
+guide: entity: freebusy: path: "/v2/calendars/connections/{connectionId}/freebusy": active: false
+guide: entity: freebusy: path: "/v2/calendars/{calendar}/freebusy": active: false
+guide: entity: keys_response_dto: path: "/v2/oauth-clients/{clientId}/users/{userId}/force-refresh": active: false
+guide: entity: keys_response_dto: path: "/v2/oauth/{clientId}/refresh": active: false
+guide: entity: list_connections_output: path: "/v2/calendars/connections": active: false
+guide: entity: list_unified_calendar_events_output: path: "/v2/calendars/connections/{connectionId}/events": active: false
+guide: entity: list_unified_calendar_events_output: path: "/v2/calendars/{calendar}/events": active: false
+guide: entity: managed_user_output: path: "/v2/oauth-clients/{clientId}/users/{userId}": active: false
+guide: entity: managed_users_output: path: "/v2/oauth-clients/{clientId}/users": active: false
+guide: entity: many_webhooks_output_response_dto: path: "/v2/event-types/{eventTypeId}/webhooks": active: false
+guide: entity: many_webhooks_output_response_dto: path: "/v2/oauth-clients/{clientId}/webhooks": active: false
+guide: entity: men: path: "/v2/me": active: false
+guide: entity: o_auth2_client_response_dto: path: "/v2/auth/oauth2/clients/{clientId}": active: false
+guide: entity: o_auth2_tokens_dto: path: "/v2/auth/oauth2/token": active: false
+guide: entity: o_auth_client_response_dto: path: "/v2/oauth-clients": active: false
+guide: entity: o_auth_client_response_dto: path: "/v2/oauth-clients/{clientId}": active: false
+guide: entity: o_auth_client_webhook_output_response_dto: path: "/v2/oauth-clients/{clientId}/webhooks": active: false
+guide: entity: o_auth_client_webhook_output_response_dto: path: "/v2/oauth-clients/{clientId}/webhooks/{webhookId}": active: false
+guide: entity: o_auth_client_webhooks_output_response_dto: path: "/v2/oauth-clients/{clientId}/webhooks": active: false
+guide: entity: reassign: path: "/v2/bookings/{bookingUid}/reassign": active: false
+guide: entity: reassign: path: "/v2/bookings/{bookingUid}/reassign/{userId}": active: false
+guide: entity: refresh: path: "/v2/api-keys/refresh": active: false
+guide: entity: remove_attendee_output_2024_08_13: path: "/v2/bookings/{bookingUid}/attendees/{attendeeId}": active: false
+guide: entity: request: path: "/v2/verified-resources/emails/verification-code/request": active: false
+guide: entity: request: path: "/v2/verified-resources/phones/verification-code/request": active: false
+guide: entity: reserve_slot_output_response_2024_09_04: path: "/v2/slots/reservations": active: false
+guide: entity: reserve_slot_output_response_2024_09_04: path: "/v2/slots/reservations/{uid}": active: false
+guide: entity: reserved_slot_output_2024_09_04: path: "/v2/slots/reservations/{uid}": active: false
+guide: entity: set_default_conferencing_app_output_response_dto: path: "/v2/conferencing/{app}/default": active: false
+guide: entity: slot: path: "/v2/slots/reservations/{uid}": active: false
+guide: entity: strip_connect_output_response_dto: path: "/v2/stripe/connect": active: false
+guide: entity: strip_credentials_check_output_response_dto: path: "/v2/stripe/check": active: false
+guide: entity: strip_credentials_save_output_response_dto: path: "/v2/stripe/save": active: false
+guide: entity: unified_calendar_event_output: path: "/v2/calendars/connections/{connectionId}/events": active: false
+guide: entity: unified_calendar_event_output: path: "/v2/calendars/connections/{connectionId}/events/{eventId}": active: false
+guide: entity: unified_calendar_event_output: path: "/v2/calendars/{calendar}/event/{eventUid}": active: false
+guide: entity: unified_calendar_event_output: path: "/v2/calendars/{calendar}/events": active: false
+guide: entity: unified_calendar_event_output: path: "/v2/calendars/{calendar}/events/{eventUid}": active: false
+guide: entity: update_event_type_output_2024_06_14: path: "/v2/event-types": active: false
+guide: entity: update_event_type_output_2024_06_14: path: "/v2/event-types/{eventTypeId}": active: false
+guide: entity: update_me_output: path: "/v2/me": active: false
+guide: entity: update_private_link_output: path: "/v2/event-types/{eventTypeId}/private-links/{linkId}": active: false
+guide: entity: update_schedule_output_2024_06_11: path: "/v2/schedules/{scheduleId}": active: false
+guide: entity: user_verified_email_output: path: "/v2/verified-resources/emails": active: false
+guide: entity: user_verified_email_output: path: "/v2/verified-resources/emails/verification-code/verify": active: false
+guide: entity: user_verified_email_output: path: "/v2/verified-resources/emails/{id}": active: false
+guide: entity: user_verified_phone_output: path: "/v2/verified-resources/phones": active: false
+guide: entity: user_verified_phone_output: path: "/v2/verified-resources/phones/verification-code/verify": active: false
+guide: entity: user_verified_phone_output: path: "/v2/verified-resources/phones/{id}": active: false
+guide: entity: user_webhook_output_response_dto: path: "/v2/webhooks": active: false
+guide: entity: user_webhook_output_response_dto: path: "/v2/webhooks/{webhookId}": active: false
+guide: entity: add_attendee_output_2024_08_13: active: false
+guide: entity: add_guests_output_2024_08_13: active: false
+guide: entity: booking_attendee_output_2024_08_13: active: false
+guide: entity: booking_attendees_output_2024_08_13: active: false
+guide: entity: booking_output_2024_08_13: active: false
+guide: entity: booking_recordings_output: active: false
+guide: entity: booking_references_output_2024_08_13: active: false
+guide: entity: booking_transcripts_output: active: false
+guide: entity: booking_video_sessions_output: active: false
+guide: entity: busy_time: active: false
+guide: entity: cal_unified_calendar: active: false
+guide: entity: calendar_link: active: false
+guide: entity: conferencing_app_output_response_dto: active: false
+guide: entity: conferencing_apps_oauth_url_response_dto: active: false
+guide: entity: connected_calendars_output: active: false
+guide: entity: create_ics_feed_output_response_dto: active: false
+guide: entity: create_managed_user_output: active: false
+guide: entity: create_private_link_output: active: false
+guide: entity: default: active: false
+guide: entity: deleted_calendar_credentials_output_response_dto: active: false
+guide: entity: disconnect: active: false
+guide: entity: event_type_webhook_output_response_dto: active: false
+guide: entity: event_type_webhooks_output_response_dto: active: false
+guide: entity: freebusy: active: false
+guide: entity: keys_response_dto: active: false
+guide: entity: list_connections_output: active: false
+guide: entity: list_unified_calendar_events_output: active: false
+guide: entity: managed_user_output: active: false
+guide: entity: managed_users_output: active: false
+guide: entity: many_webhooks_output_response_dto: active: false
+guide: entity: men: active: false
+guide: entity: o_auth2_client_response_dto: active: false
+guide: entity: o_auth2_tokens_dto: active: false
+guide: entity: o_auth_client_response_dto: active: false
+guide: entity: o_auth_client_webhook_output_response_dto: active: false
+guide: entity: o_auth_client_webhooks_output_response_dto: active: false
+guide: entity: reassign: active: false
+guide: entity: refresh: active: false
+guide: entity: remove_attendee_output_2024_08_13: active: false
+guide: entity: request: active: false
+guide: entity: reserve_slot_output_response_2024_09_04: active: false
+guide: entity: reserved_slot_output_2024_09_04: active: false
+guide: entity: set_default_conferencing_app_output_response_dto: active: false
+guide: entity: strip_connect_output_response_dto: active: false
+guide: entity: strip_credentials_check_output_response_dto: active: false
+guide: entity: strip_credentials_save_output_response_dto: active: false
+guide: entity: unified_calendar_event_output: active: false
+guide: entity: update_event_type_output_2024_06_14: active: false
+guide: entity: update_me_output: active: false
+guide: entity: update_private_link_output: active: false
+guide: entity: update_schedule_output_2024_06_11: active: false
+guide: entity: user_verified_email_output: active: false
+guide: entity: user_verified_phone_output: active: false
+guide: entity: user_webhook_output_response_dto: active: false
+
+# Shared paths need one rename map across all operations:
+# attendee/webhook parents retain booking_id/event_type_id; existing items use id.
+# Item keys are named id so generated CRUD flows can supply them.
+# calendar_provider distinguishes the provider path from the calendarId query.
+# Connection-scoped events use connection; provider routes are the default.
+# Actions distinguish defaults, refreshes, subresources, and deprecated routes.
+# Only documented data envelopes are unwrapped: OAuth2 tokens, status-only
+# results, and redirects retain their base response transforms.
+
+guide: entity: attendee: {
+  id: composite: false
+  path: "/v2/bookings/{bookingUid}/attendees": {
+    rename: param: "bookingUid": "booking_id"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings/{bookingUid}/attendees/{attendeeId}": {
+    rename: param: "attendeeId": "id"
+    rename: param: "bookingUid": "booking_id"
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+    op: remove: method: "DELETE"
+    op: remove: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: booking: {
+  path: "/v2/bookings/{bookingUid}/guests": {
+    action: "guests": {}
+    rename: param: "bookingUid": "booking_id"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings": {
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings/{bookingUid}": {
+    rename: param: "bookingUid": "id"
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings/{bookingUid}/cancel": {
+    action: "cancel": {}
+    rename: param: "bookingUid": "id"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings/{bookingUid}/location": {
+    action: "location": {}
+    rename: param: "bookingUid": "id"
+    op: patch: method: "PATCH"
+    op: patch: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings/{bookingUid}/mark-absent": {
+    action: "mark_absent": {}
+    rename: param: "bookingUid": "id"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings/{bookingUid}/reschedule": {
+    action: "reschedule": {}
+    rename: param: "bookingUid": "id"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings/by-seat/{seatUid}": {
+    action: "by_seat": {}
+    rename: param: "seatUid": "seat_uid"
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings/{bookingUid}/confirm": {
+    action: "confirm": {}
+    rename: param: "bookingUid": "id"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings/{bookingUid}/decline": {
+    action: "decline": {}
+    rename: param: "bookingUid": "id"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings/{bookingUid}/recordings": {
+    action: "recordings": {}
+    rename: param: "bookingUid": "id"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings/{bookingUid}/references": {
+    action: "references": {}
+    rename: param: "bookingUid": "id"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings/{bookingUid}/transcripts": {
+    action: "transcripts": {}
+    rename: param: "bookingUid": "id"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings/{bookingUid}/conferencing-sessions": {
+    action: "conferencing-sessions": {}
+    rename: param: "bookingUid": "id"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings/{bookingUid}/calendar-links": {
+    action: "calendar_links": {}
+    rename: param: "bookingUid": "booking_id"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings/{bookingUid}/reassign": {
+    action: "reassign": {}
+    rename: param: "bookingUid": "booking_id"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/bookings/{bookingUid}/reassign/{userId}": {
+    action: "reassign": {}
+    rename: param: "bookingUid": "booking_id"
+    rename: param: "userId": "id"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: calendar: {
+  path: "/v2/calendars/busy-times": {
+    action: "busy_times": {}
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/calendars/ics-feed/check": {
+    action: "check_ics_feed": {}
+    op: load: method: "GET"
+  }
+  path: "/v2/calendars/{calendar}/check": {
+    action: "check": {}
+    rename: param: "calendar": "id"
+    op: load: method: "GET"
+  }
+  path: "/v2/calendars/{calendar}/connect": {
+    action: "connect": {}
+    rename: param: "calendar": "id"
+    op: load: method: "GET"
+  }
+  path: "/v2/calendars/{calendar}/credentials": {
+    action: "credential": {}
+    rename: param: "calendar": "id"
+    op: create: method: "POST"
+  }
+  path: "/v2/calendars/{calendar}/save": {
+    action: "save": {}
+    rename: param: "calendar": "id"
+    op: load: method: "GET"
+  }
+  path: "/v2/calendars": {
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+  }
+  path: "/v2/calendars/ics-feed/save": {
+    action: "save_ics_feed": {}
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/calendars/{calendar}/disconnect": {
+    action: "disconnect": {}
+    rename: param: "calendar": "calendar_id"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/calendars/connections/{connectionId}/freebusy": {
+    action: "freebusy": {}
+    rename: param: "connectionId": "connection_id"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/calendars/{calendar}/freebusy": {
+    action: "freebusy": {}
+    rename: param: "calendar": "calendar_id"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/calendars/connections": {
+    action: "connections": {}
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: calendar_event: {
+  id: composite: false
+  path: "/v2/calendars/connections/{connectionId}/events/{eventId}": {
+    action: "connection": {}
+    rename: param: "connectionId": "connection_id"
+    rename: param: "eventId": "id"
+    op: remove: method: "DELETE"
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+    op: patch: method: "PATCH"
+    op: patch: transform: res: "`body.data`"
+  }
+  path: "/v2/calendars/{calendar}/events/{eventUid}": {
+    rename: param: "calendar": "calendar_provider"
+    rename: param: "eventUid": "id"
+    op: remove: method: "DELETE"
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+    op: patch: method: "PATCH"
+    op: patch: transform: res: "`body.data`"
+  }
+  path: "/v2/calendars/connections/{connectionId}/events": {
+    action: "connection": {}
+    rename: param: "connectionId": "connection_id"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/calendars/{calendar}/events": {
+    rename: param: "calendar": "calendar_provider"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/calendars/{calendar}/event/{eventUid}": {
+    action: "legacy": {}
+    rename: param: "calendar": "calendar_provider"
+    rename: param: "eventUid": "id"
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+    op: patch: method: "PATCH"
+    op: patch: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: conferencing: {
+  path: "/v2/conferencing/{app}/oauth/callback": {
+    action: "oauth_callback": {}
+    rename: param: "app": "conferencing_id"
+    op: load: method: "GET"
+  }
+  path: "/v2/conferencing": {
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/conferencing/{app}/connect": {
+    action: "connect": {}
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/conferencing/{app}/oauth/auth-url": {
+    action: "oauth": {}
+    rename: param: "app": "conferencing_id"
+    op: load: method: "GET"
+  }
+  path: "/v2/conferencing/default": {
+    action: "default": {}
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+  }
+  path: "/v2/conferencing/{app}/disconnect": {
+    action: "disconnect": {}
+    op: remove: method: "DELETE"
+  }
+  path: "/v2/conferencing/{app}/default": {
+    action: "default": {}
+    op: create: method: "POST"
+  }
+}
+
+guide: entity: managed_user: {
+  id: composite: false
+  path: "/v2/oauth-clients/{clientId}/users": {
+    rename: param: "clientId": "oauth_client_id"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/oauth-clients/{clientId}/users/{userId}": {
+    rename: param: "clientId": "oauth_client_id"
+    rename: param: "userId": "id"
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+    op: patch: method: "PATCH"
+    op: patch: transform: res: "`body.data`"
+    op: remove: method: "DELETE"
+    op: remove: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: private_link: {
+  path: "/v2/event-types/{eventTypeId}/private-links": {
+    rename: param: "eventTypeId": "event_type_id"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/event-types/{eventTypeId}/private-links/{linkId}": {
+    rename: param: "eventTypeId": "event_type_id"
+    rename: param: "linkId": "id"
+    op: remove: method: "DELETE"
+    op: remove: transform: res: "`body.data`"
+    op: patch: method: "PATCH"
+    op: patch: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: schedule: {
+  path: "/v2/schedules/default": {
+    action: "default": {}
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+  }
+  path: "/v2/schedules": {
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/schedules/{scheduleId}": {
+    rename: param: "scheduleId": "id"
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+    op: remove: method: "DELETE"
+    op: patch: method: "PATCH"
+    op: patch: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: destination_calendar: {
+  path: "/v2/destination-calendars": {
+    op: update: method: "PUT"
+    op: update: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: event_type: {
+  path: "/v2/event-types/{eventTypeId}": {
+    rename: param: "eventTypeId": "id"
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+    op: remove: method: "DELETE"
+    op: remove: transform: res: "`body.data`"
+    op: patch: method: "PATCH"
+    op: patch: transform: res: "`body.data`"
+  }
+  path: "/v2/event-types": {
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: event_type_webhook: {
+  id: composite: false
+  path: "/v2/event-types/{eventTypeId}/webhooks": {
+    rename: param: "eventTypeId": "event_type_id"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+    op: remove: method: "DELETE"
+    op: remove: transform: res: "`body.data`"
+  }
+  path: "/v2/event-types/{eventTypeId}/webhooks/{webhookId}": {
+    rename: param: "eventTypeId": "event_type_id"
+    rename: param: "webhookId": "id"
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+    op: patch: method: "PATCH"
+    op: patch: transform: res: "`body.data`"
+    op: remove: method: "DELETE"
+    op: remove: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: oauth_token: {
+  path: "/v2/oauth-clients/{clientId}/users/{userId}/force-refresh": {
+    action: "force_refresh": {}
+    rename: param: "clientId": "oauth_client_id"
+    rename: param: "userId": "user_id"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/oauth/{clientId}/refresh": {
+    action: "refresh": {}
+    rename: param: "clientId": "oauth_id"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/auth/oauth2/token": {
+    op: create: method: "POST"
+  }
+}
+
+guide: entity: oauth_client_webhook: {
+  id: composite: false
+  path: "/v2/oauth-clients/{clientId}/webhooks": {
+    rename: param: "clientId": "oauth_client_id"
+    op: remove: method: "DELETE"
+    op: remove: transform: res: "`body.data`"
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/oauth-clients/{clientId}/webhooks/{webhookId}": {
+    rename: param: "clientId": "oauth_client_id"
+    rename: param: "webhookId": "id"
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+    op: patch: method: "PATCH"
+    op: patch: transform: res: "`body.data`"
+    op: remove: method: "DELETE"
+    op: remove: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: me: {
+  path: "/v2/me": {
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+    op: patch: method: "PATCH"
+    op: patch: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: oauth_client: {
+  path: "/v2/auth/oauth2/clients/{clientId}": {
+    action: "oauth2": {}
+    rename: param: "clientId": "client_id"
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+  }
+  path: "/v2/oauth-clients": {
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/oauth-clients/{clientId}": {
+    rename: param: "clientId": "id"
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+    op: patch: method: "PATCH"
+    op: patch: transform: res: "`body.data`"
+    op: remove: method: "DELETE"
+    op: remove: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: api_key: {
+  path: "/v2/api-keys/refresh": {
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: verified_email: {
+  path: "/v2/verified-resources/emails/verification-code/request": {
+    action: "request": {}
+    op: create: method: "POST"
+  }
+  path: "/v2/verified-resources/emails": {
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/verified-resources/emails/verification-code/verify": {
+    action: "verify": {}
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/verified-resources/emails/{id}": {
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: verified_phone: {
+  path: "/v2/verified-resources/phones/verification-code/request": {
+    action: "request": {}
+    op: create: method: "POST"
+  }
+  path: "/v2/verified-resources/phones": {
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/verified-resources/phones/verification-code/verify": {
+    action: "verify": {}
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/verified-resources/phones/{id}": {
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: slot_reservation: {
+  path: "/v2/slots/reservations": {
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+  }
+  path: "/v2/slots/reservations/{uid}": {
+    rename: param: "uid": "id"
+    op: patch: method: "PATCH"
+    op: patch: transform: res: "`body.data`"
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+    op: remove: method: "DELETE"
+  }
+}
+
+guide: entity: selected_calendar: {
+  path: "/v2/selected-calendars": {
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+    op: remove: method: "DELETE"
+    op: remove: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: slot: {
+  path: "/v2/slots": {
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+  }
+}
+
+guide: entity: stripe: {
+  path: "/v2/stripe/connect": {
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+  }
+  path: "/v2/stripe/check": {
+    action: "check": {}
+    op: load: method: "GET"
+    op: load: transform: res: "`body.status`"
+  }
+  path: "/v2/stripe/save": {
+    op: load: method: "GET"
+  }
+}
+
+guide: entity: webhook: {
+  path: "/v2/webhooks": {
+    op: create: method: "POST"
+    op: create: transform: res: "`body.data`"
+    op: list: method: "GET"
+    op: list: transform: res: "`body.data`"
+  }
+  path: "/v2/webhooks/{webhookId}": {
+    rename: param: "webhookId": "id"
+    op: load: method: "GET"
+    op: load: transform: res: "`body.data`"
+    op: patch: method: "PATCH"
+    op: patch: transform: res: "`body.data`"
+    op: remove: method: "DELETE"
+    op: remove: transform: res: "`body.data`"
+  }
+}

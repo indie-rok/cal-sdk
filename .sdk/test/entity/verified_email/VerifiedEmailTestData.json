@@ -1,0 +1,51 @@
+{
+  "existing": {
+    "verified_email": {
+      "VERIFIED_EMAIL00": {
+        "email": "s1e",
+        "id": "VERIFIED_EMAIL00",
+        "userId": 32
+      },
+      "VERIFIED_EMAIL01": {
+        "email": "s3c",
+        "id": "VERIFIED_EMAIL01",
+        "userId": 62
+      },
+      "VERIFIED_EMAIL02": {
+        "email": "s5a",
+        "id": "VERIFIED_EMAIL02",
+        "userId": 92
+      }
+    }
+  },
+  "new": {
+    "verified_email": {
+      "verified_email_ref01": {
+        "email": "s78",
+        "userId": 122
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/verified-resources/emails/verification-code/request": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/verified-resources/emails/verification-code/verify": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/verified-resources/emails": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/verified-resources/emails/{id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

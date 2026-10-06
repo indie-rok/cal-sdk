@@ -1,0 +1,402 @@
+# Entity: attendee
+
+main: kit: entity: attendee: {
+
+  alias: field: {}
+
+  fields: {
+    absent: {
+      h: "Absent"
+      n: "absent"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    displayEmail: {
+      h: "Display Email"
+      n: "displayEmail"
+      r: true
+      sh: "Clean email for display purposes"
+      t: "`$STRING`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: true
+      sh: "The email of the attendee."
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$NUMBER`"
+    }
+    language: {
+      h: "Language"
+      n: "language"
+      r: false
+      sh: "The preferred language of the attendee."
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      sh: "The name of the attendee."
+      t: "`$STRING`"
+    }
+    phoneNumber: {
+      h: "Phone Number"
+      n: "phoneNumber"
+      r: false
+      sh: "The phone number of the attendee in international format."
+      t: "`$STRING`"
+    }
+    timeZone: {
+      h: "Time Zone"
+      n: "timeZone"
+      r: true
+      sh: "The time zone of the attendee."
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "attendee"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/bookings/{bookingUid}/attendees"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "booking_id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/bookings/{bookingUid}/attendees"
+          q: {
+            exist: [
+              "authorization"
+              "booking_id"
+              "cal_api_version"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "booking_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "booking_id"
+            }
+            {
+              lit: "attendees"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/bookings/{bookingUid}/attendees"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "booking_id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/bookings/{bookingUid}/attendees"
+          q: {
+            exist: [
+              "authorization"
+              "booking_id"
+              "cal_api_version"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "booking_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "booking_id"
+            }
+            {
+              lit: "attendees"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/bookings/{bookingUid}/attendees/{attendeeId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "booking_id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "attendeeId"
+                r: true
+                t: "`$NUMBER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/bookings/{bookingUid}/attendees/{attendeeId}"
+          q: {
+            exist: [
+              "authorization"
+              "booking_id"
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              attendeeId: "id"
+              bookingUid: "booking_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "booking_id"
+            }
+            {
+              lit: "attendees"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v2/bookings/{bookingUid}/attendees/{attendeeId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "booking_id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "attendeeId"
+                r: true
+                t: "`$NUMBER`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v2/bookings/{bookingUid}/attendees/{attendeeId}"
+          q: {
+            exist: [
+              "authorization"
+              "booking_id"
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              attendeeId: "id"
+              bookingUid: "booking_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "booking_id"
+            }
+            {
+              lit: "attendees"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.booking")]
+  ]
+
+}

@@ -1,0 +1,95 @@
+# BasicPrivateLinkFlow
+
+main: kit: flow: BasicPrivateLinkFlow:
+{
+  entity: "private_link",
+  kind: "basic",
+  name: "BasicPrivateLinkFlow",
+  step: [
+    {
+      i: {
+        ref: "private_link_ref01"
+      }
+
+      m: {
+        event_type_id: "event_type01"
+      }
+
+      o: "create"
+    }
+
+    {
+      m: {
+        event_type_id: "event_type01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "private_link_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      d: {
+        event_type_id: "event_type01"
+      }
+
+      i: {
+        ref: "private_link_ref01",
+        srcdatavar: "private_link_ref01_data",
+        suffix: "_up0",
+        textfield: "expiresAt"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-private_link_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "private_link_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        event_type_id: "event_type01",
+        id: "private_link01"
+      }
+
+      o: "remove"
+    }
+
+    {
+      i: {
+        suffix: "_rt0"
+      }
+
+      m: {
+        event_type_id: "event_type01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "private_link_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPrivateLinkFlow"
+}

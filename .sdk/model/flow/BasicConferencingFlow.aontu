@@ -1,0 +1,81 @@
+# BasicConferencingFlow
+
+main: kit: flow: BasicConferencingFlow:
+{
+  entity: "conferencing",
+  kind: "basic",
+  name: "BasicConferencingFlow",
+  step: [
+    {
+      i: {
+        ref: "conferencing_ref01"
+      }
+
+      m: {
+        app: "app01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "conferencing_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "conferencing_ref01",
+        srcdatavar: "conferencing_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-conferencing_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "conferencing_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "conferencing01"
+      }
+
+      o: "remove"
+    }
+
+    {
+      i: {
+        suffix: "_rt0"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "conferencing_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicConferencingFlow"
+}

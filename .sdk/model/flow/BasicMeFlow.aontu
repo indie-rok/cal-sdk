@@ -1,0 +1,47 @@
+# BasicMeFlow
+
+main: kit: flow: BasicMeFlow:
+{
+  entity: "me",
+  kind: "basic",
+  name: "BasicMeFlow",
+  step: [
+    {
+      i: {
+        ref: "me_ref01",
+        srcdatavar: "me_ref01_data",
+        suffix: "_up0",
+        textfield: "avatarUrl"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-me_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "me_ref01",
+        srcdatavar: "me_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-me_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicMeFlow"
+}

@@ -1,0 +1,563 @@
+# Entity: managed_user
+
+main: kit: entity: managed_user: {
+
+  alias: field: {}
+
+  fields: {
+    avatarUrl: {
+      h: "Avatar Url"
+      n: "avatarUrl"
+      r: false
+      sh: "URL of the user's avatar image"
+      t: "`$STRING`"
+    }
+    bio: {
+      h: "Bio"
+      n: "bio"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "Bio"
+      t: "`$STRING`"
+    }
+    createdDate: {
+      h: "Created Date"
+      n: "createdDate"
+      r: true
+      t: "`$STRING`"
+    }
+    defaultScheduleId: {
+      h: "Default Schedule Id"
+      n: "defaultScheduleId"
+      op: {
+        update: {
+          req: false
+          type: "`$NUMBER`"
+        }
+      }
+      r: true
+      t: "`$NUMBER`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$NUMBER`"
+    }
+    locale: {
+      h: "Locale"
+      n: "locale"
+      r: false
+      t: "`$STRING`"
+    }
+    metadata: {
+      h: "Metadata"
+      n: "metadata"
+      r: false
+      sh: "You can store any additional data you want here."
+      t: "`$OBJECT`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "Managed user's name is used in emails"
+      t: "`$STRING`"
+    }
+    timeFormat: {
+      h: "Time Format"
+      n: "timeFormat"
+      op: {
+        create: {
+          req: false
+          type: "`$NUMBER`"
+        }
+        update: {
+          req: false
+          type: "`$NUMBER`"
+        }
+      }
+      r: true
+      sh: "Must be a number 12 or 24"
+      t: "`$NUMBER`"
+    }
+    timeZone: {
+      h: "Time Zone"
+      n: "timeZone"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "Timezone is used to create user's default schedule from Monday to Friday from 9AM to 5PM."
+      t: "`$STRING`"
+    }
+    username: {
+      h: "Username"
+      n: "username"
+      r: true
+      t: "`$STRING`"
+    }
+    weekStart: {
+      h: "Week Start"
+      n: "weekStart"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "managed_user"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/oauth-clients/{clientId}/users"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "oauth_client_id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/oauth-clients/{clientId}/users"
+          q: {
+            exist: [
+              "oauth_client_id"
+              "x_cal_secret_key"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "oauth_client_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+            {
+              var: "oauth_client_id"
+            }
+            {
+              lit: "users"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/oauth-clients/{clientId}/users"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "oauth_client_id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "?emails=email1@example.com,email2@example.com"
+                k: "query"
+                n: "email"
+                or: "emails"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$NUMBER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/oauth-clients/{clientId}/users"
+          q: {
+            exist: [
+              "oauth_client_id"
+              "x_cal_secret_key"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "oauth_client_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+            {
+              var: "oauth_client_id"
+            }
+            {
+              lit: "users"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/oauth-clients/{clientId}/users/{userId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "userId"
+                r: true
+                t: "`$NUMBER`"
+              }
+              {
+                k: "param"
+                n: "oauth_client_id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/oauth-clients/{clientId}/users/{userId}"
+          q: {
+            exist: [
+              "id"
+              "oauth_client_id"
+              "x_cal_secret_key"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "oauth_client_id"
+              userId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+            {
+              var: "oauth_client_id"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v2/oauth-clients/{clientId}/users/{userId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "userId"
+                r: true
+                t: "`$NUMBER`"
+              }
+              {
+                k: "param"
+                n: "oauth_client_id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v2/oauth-clients/{clientId}/users/{userId}"
+          q: {
+            exist: [
+              "id"
+              "oauth_client_id"
+              "x_cal_secret_key"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "oauth_client_id"
+              userId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+            {
+              var: "oauth_client_id"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /v2/oauth-clients/{clientId}/users/{userId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "userId"
+                r: true
+                t: "`$NUMBER`"
+              }
+              {
+                k: "param"
+                n: "oauth_client_id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/oauth-clients/{clientId}/users/{userId}"
+          q: {
+            exist: [
+              "id"
+              "oauth_client_id"
+              "x_cal_secret_key"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "oauth_client_id"
+              userId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+            {
+              var: "oauth_client_id"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.oauth_client")]
+  ]
+
+}

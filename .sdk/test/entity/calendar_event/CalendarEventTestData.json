@@ -1,0 +1,129 @@
+{
+  "existing": {
+    "calendar_event": {
+      "CALENDAR_EVENT00": {
+        "attendees": [],
+        "calendarEventOwner": "s6f",
+        "description": "s70",
+        "end": {},
+        "hosts": [],
+        "id": "CALENDAR_EVENT00",
+        "locations": [],
+        "source": "s75",
+        "start": {},
+        "status": "s77",
+        "title": "s78",
+        "calendar_provider": "CALENDAR_PROVIDER01",
+        "connection_id": "CONNECTION01"
+      },
+      "CALENDAR_EVENT01": {
+        "attendees": [],
+        "calendarEventOwner": "sdd",
+        "description": "sde",
+        "end": {},
+        "hosts": [],
+        "id": "CALENDAR_EVENT01",
+        "locations": [],
+        "source": "se3",
+        "start": {},
+        "status": "se5",
+        "title": "se6",
+        "calendar_provider": "CALENDAR_PROVIDER01",
+        "connection_id": "CONNECTION01"
+      },
+      "CALENDAR_EVENT02": {
+        "attendees": [],
+        "calendarEventOwner": "s14b",
+        "description": "s14c",
+        "end": {},
+        "hosts": [],
+        "id": "CALENDAR_EVENT02",
+        "locations": [],
+        "source": "s151",
+        "start": {},
+        "status": "s153",
+        "title": "s154",
+        "calendar_provider": "CALENDAR_PROVIDER01",
+        "connection_id": "CONNECTION01"
+      }
+    }
+  },
+  "new": {
+    "calendar_event": {
+      "calendar_event_ref01": {
+        "attendees": [],
+        "calendarEventOwner": "s1b9",
+        "description": "s1ba",
+        "end": {},
+        "hosts": [],
+        "locations": [],
+        "source": "s1bf",
+        "start": {},
+        "status": "s1c1",
+        "title": "s1c2"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/calendars/{calendar}/events": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/calendars/connections/{connectionId}/events": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/calendars/{calendar}/events": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/calendars/connections/{connectionId}/events": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/calendars/connections/{connectionId}/events/{eventId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/calendars/{calendar}/event/{eventUid}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/calendars/{calendar}/events/{eventUid}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/calendars/{calendar}/events/{eventUid}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/calendars/connections/{connectionId}/events/{eventId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/calendars/connections/{connectionId}/events/{eventId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/calendars/{calendar}/event/{eventUid}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/calendars/{calendar}/events/{eventUid}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

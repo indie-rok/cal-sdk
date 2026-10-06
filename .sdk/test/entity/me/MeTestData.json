@@ -1,0 +1,85 @@
+{
+  "existing": {
+    "me": {
+      "ME00": {
+        "avatarUrl": "s8c",
+        "bio": "s8d",
+        "defaultScheduleId": 142,
+        "email": "s8f",
+        "id": "ME00",
+        "locale": "s91",
+        "metadata": {},
+        "name": "s93",
+        "organization": {},
+        "organizationId": 149,
+        "timeFormat": 150,
+        "timeZone": "s97",
+        "username": "s98",
+        "weekStart": "s99"
+      },
+      "ME01": {
+        "avatarUrl": "s118",
+        "bio": "s119",
+        "defaultScheduleId": 282,
+        "email": "s11b",
+        "id": "ME01",
+        "locale": "s11d",
+        "metadata": {},
+        "name": "s11f",
+        "organization": {},
+        "organizationId": 289,
+        "timeFormat": 290,
+        "timeZone": "s123",
+        "username": "s124",
+        "weekStart": "s125"
+      },
+      "ME02": {
+        "avatarUrl": "s1a4",
+        "bio": "s1a5",
+        "defaultScheduleId": 422,
+        "email": "s1a7",
+        "id": "ME02",
+        "locale": "s1a9",
+        "metadata": {},
+        "name": "s1ab",
+        "organization": {},
+        "organizationId": 429,
+        "timeFormat": 430,
+        "timeZone": "s1af",
+        "username": "s1b0",
+        "weekStart": "s1b1"
+      }
+    }
+  },
+  "new": {
+    "me": {
+      "me_ref01": {
+        "avatarUrl": "s230",
+        "bio": "s231",
+        "defaultScheduleId": 562,
+        "email": "s233",
+        "locale": "s235",
+        "metadata": {},
+        "name": "s237",
+        "organization": {},
+        "organizationId": 569,
+        "timeFormat": 570,
+        "timeZone": "s23b",
+        "username": "s23c",
+        "weekStart": "s23d"
+      }
+    }
+  },
+  "requests": {
+    "GET /v2/me": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/me": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

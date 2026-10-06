@@ -1,0 +1,224 @@
+# Entity: oauth_token
+
+main: kit: entity: oauth_token: {
+
+  alias: field: {}
+
+  fields: {
+    access_token: {
+      h: "Access Token"
+      n: "access_token"
+      r: true
+      sh: "The access token"
+      t: "`$STRING`"
+    }
+    expires_in: {
+      h: "Expires In"
+      n: "expires_in"
+      r: true
+      sh: "The number of seconds until the access token expires"
+      t: "`$NUMBER`"
+    }
+    refresh_token: {
+      h: "Refresh Token"
+      n: "refresh_token"
+      r: true
+      sh: "The refresh token"
+      t: "`$STRING`"
+    }
+    token_type: {
+      h: "Token Type"
+      n: "token_type"
+      r: true
+      sh: "The token type"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "oauth_token"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/oauth-clients/{clientId}/users/{userId}/force-refresh"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "oauth_client_id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "user_id"
+                or: "userId"
+                r: true
+                t: "`$NUMBER`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/oauth-clients/{clientId}/users/{userId}/force-refresh"
+          q: {
+            "$action": "force_refresh"
+            exist: [
+              "oauth_client_id"
+              "user_id"
+              "x_cal_secret_key"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "oauth_client_id"
+              userId: "user_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+            {
+              var: "oauth_client_id"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "force-refresh"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v2/oauth/{clientId}/refresh"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "oauth_id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/oauth/{clientId}/refresh"
+          q: {
+            "$action": "refresh"
+            exist: [
+              "oauth_id"
+              "x_cal_secret_key"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "oauth_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth"
+            }
+            {
+              var: "oauth_id"
+            }
+            {
+              lit: "refresh"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v2/auth/oauth2/token"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/v2/auth/oauth2/token"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "auth"
+            }
+            {
+              lit: "oauth2"
+            }
+            {
+              lit: "token"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.oauth_client")]
+  ]
+
+}

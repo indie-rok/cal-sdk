@@ -1,0 +1,1104 @@
+# Entity: calendar_event
+
+main: kit: entity: calendar_event: {
+
+  alias: field: {}
+
+  fields: {
+    attendees: {
+      h: "Attendees"
+      n: "attendees"
+      r: false
+      sh: "List of attendees with their response status"
+      t: "`$ARRAY`"
+    }
+    calendarEventOwner: {
+      h: "Calendar Event Owner"
+      n: "calendarEventOwner"
+      r: false
+      sh: "The calendar account that owns this event."
+      t: "`$ANY`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      sh: "Detailed description of the calendar event"
+      t: "`$STRING`"
+    }
+    end: {
+      h: "End"
+      n: "end"
+      op: {
+        update: {
+          req: false
+          type: "`$OBJECT`"
+        }
+      }
+      r: true
+      sh: "End date and time of the calendar event with timezone information"
+      t: "`$OBJECT`"
+    }
+    hosts: {
+      h: "Hosts"
+      n: "hosts"
+      r: false
+      sh: "Information about the event hosts (organizers)"
+      t: "`$ARRAY`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      sh: "Unique identifier of the calendar event"
+      t: "`$STRING`"
+    }
+    locations: {
+      h: "Locations"
+      n: "locations"
+      r: false
+      sh: "Conference locations with entry points (video, phone, sip, more)"
+      t: "`$ARRAY`"
+    }
+    source: {
+      h: "Source"
+      n: "source"
+      r: true
+      sh: "Calendar integration source (e.g., Google Calendar, Office 365, Apple Calendar)."
+      t: "`$STRING`"
+    }
+    start: {
+      h: "Start"
+      n: "start"
+      op: {
+        update: {
+          req: false
+          type: "`$OBJECT`"
+        }
+      }
+      r: true
+      sh: "Start date and time of the calendar event with timezone information"
+      t: "`$OBJECT`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      sh: "Status of the event (accepted, pending, declined, cancelled)"
+      t: "`$STRING`"
+    }
+    title: {
+      h: "Title"
+      n: "title"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "Title of the calendar event"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "calendar_event"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/calendars/{calendar}/events"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "calendar_provider"
+                or: "calendar"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/calendars/{calendar}/events"
+          q: {
+            exist: [
+              "authorization"
+              "calendar_provider"
+            ]
+          }
+          r: {
+            param: {
+              calendar: "calendar_provider"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              var: "calendar_provider"
+            }
+            {
+              lit: "events"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v2/calendars/connections/{connectionId}/events"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "connection_id"
+                or: "connectionId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "calendar_id"
+                or: "calendarId"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/calendars/connections/{connectionId}/events"
+          q: {
+            "$action": "connection"
+            exist: [
+              "authorization"
+              "connection_id"
+            ]
+          }
+          r: {
+            param: {
+              connectionId: "connection_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              lit: "connections"
+            }
+            {
+              var: "connection_id"
+            }
+            {
+              lit: "events"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/calendars/{calendar}/events"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "calendar_provider"
+                or: "calendar"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "primary"
+                k: "query"
+                n: "calendar_id"
+                or: "calendarId"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2026-03-01"
+                k: "query"
+                n: "from"
+                or: "from"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "time_zone"
+                or: "timeZone"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2026-03-31"
+                k: "query"
+                n: "to"
+                or: "to"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/calendars/{calendar}/events"
+          q: {
+            exist: [
+              "authorization"
+              "calendar_provider"
+              "from"
+              "to"
+            ]
+          }
+          r: {
+            param: {
+              calendar: "calendar_provider"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              var: "calendar_provider"
+            }
+            {
+              lit: "events"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/calendars/connections/{connectionId}/events"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "connection_id"
+                or: "connectionId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "primary"
+                k: "query"
+                n: "calendar_id"
+                or: "calendarId"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2026-03-01"
+                k: "query"
+                n: "from"
+                or: "from"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "time_zone"
+                or: "timeZone"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2026-03-31"
+                k: "query"
+                n: "to"
+                or: "to"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/calendars/connections/{connectionId}/events"
+          q: {
+            "$action": "connection"
+            exist: [
+              "authorization"
+              "connection_id"
+              "from"
+              "to"
+            ]
+          }
+          r: {
+            param: {
+              connectionId: "connection_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              lit: "connections"
+            }
+            {
+              var: "connection_id"
+            }
+            {
+              lit: "events"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/calendars/connections/{connectionId}/events/{eventId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "connection_id"
+                or: "connectionId"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "eventId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "calendar_id"
+                or: "calendarId"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/calendars/connections/{connectionId}/events/{eventId}"
+          q: {
+            "$action": "connection"
+            exist: [
+              "authorization"
+              "connection_id"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              connectionId: "connection_id"
+              eventId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              lit: "connections"
+            }
+            {
+              var: "connection_id"
+            }
+            {
+              lit: "events"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/calendars/{calendar}/event/{eventUid}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "calendar_provider"
+                or: "calendar"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "eventUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/calendars/{calendar}/event/{eventUid}"
+          q: {
+            "$action": "legacy"
+            exist: [
+              "authorization"
+              "calendar_provider"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              calendar: "calendar_provider"
+              eventUid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              var: "calendar_provider"
+            }
+            {
+              lit: "event"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/calendars/{calendar}/events/{eventUid}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "calendar_provider"
+                or: "calendar"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "eventUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/calendars/{calendar}/events/{eventUid}"
+          q: {
+            exist: [
+              "authorization"
+              "calendar_provider"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              calendar: "calendar_provider"
+              eventUid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              var: "calendar_provider"
+            }
+            {
+              lit: "events"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v2/calendars/{calendar}/events/{eventUid}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "calendar_provider"
+                or: "calendar"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "eventUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v2/calendars/{calendar}/events/{eventUid}"
+          q: {
+            exist: [
+              "authorization"
+              "calendar_provider"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              calendar: "calendar_provider"
+              eventUid: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              var: "calendar_provider"
+            }
+            {
+              lit: "events"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "DELETE /v2/calendars/connections/{connectionId}/events/{eventId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "connection_id"
+                or: "connectionId"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "eventId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "calendar_id"
+                or: "calendarId"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v2/calendars/connections/{connectionId}/events/{eventId}"
+          q: {
+            "$action": "connection"
+            exist: [
+              "authorization"
+              "connection_id"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              connectionId: "connection_id"
+              eventId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              lit: "connections"
+            }
+            {
+              var: "connection_id"
+            }
+            {
+              lit: "events"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /v2/calendars/connections/{connectionId}/events/{eventId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "connection_id"
+                or: "connectionId"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "eventId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "calendar_id"
+                or: "calendarId"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/calendars/connections/{connectionId}/events/{eventId}"
+          q: {
+            "$action": "connection"
+            exist: [
+              "authorization"
+              "connection_id"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              connectionId: "connection_id"
+              eventId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              lit: "connections"
+            }
+            {
+              var: "connection_id"
+            }
+            {
+              lit: "events"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "PATCH /v2/calendars/{calendar}/event/{eventUid}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "calendar_provider"
+                or: "calendar"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "eventUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/calendars/{calendar}/event/{eventUid}"
+          q: {
+            "$action": "legacy"
+            exist: [
+              "authorization"
+              "calendar_provider"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              calendar: "calendar_provider"
+              eventUid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              var: "calendar_provider"
+            }
+            {
+              lit: "event"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "PATCH /v2/calendars/{calendar}/events/{eventUid}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "calendar_provider"
+                or: "calendar"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "eventUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/calendars/{calendar}/events/{eventUid}"
+          q: {
+            exist: [
+              "authorization"
+              "calendar_provider"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              calendar: "calendar_provider"
+              eventUid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              var: "calendar_provider"
+            }
+            {
+              lit: "events"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.calendar")]
+  ]
+
+}

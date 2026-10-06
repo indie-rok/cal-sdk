@@ -1,0 +1,21 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      auth: false
+      description: "Cal.com is open-source scheduling infrastructure. Its v2 REST API has 121 operations across 82 URL paths; every call needs a Bearer token, a cal-api-version header whose value differs per resource, and returns its result wrapped in a { status, data } envelope. This SDK hides that plumbing: you work with bookings, event types, schedules, slots, calendars and webhooks as objects with load, list, create, update and remove."
+      servers: [
+        {
+          url: "https://api.cal.com"
+        }
+      ]
+      summary: "Cal.com is open-source scheduling infrastructure."
+      title: "Cal.com API v2"
+      version: "1.0.0"
+      website: "https://cal.com"
+    }
+  }
+}
+

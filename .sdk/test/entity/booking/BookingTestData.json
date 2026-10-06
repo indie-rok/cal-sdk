@@ -1,0 +1,135 @@
+{
+  "existing": {
+    "booking": {
+      "BOOKING00": {
+        "data": "s32",
+        "error": {},
+        "id": "BOOKING00",
+        "pagination": {},
+        "status": "s36",
+        "booking_id": "BOOKING01",
+        "seat_uid": "SEAT_UID01"
+      },
+      "BOOKING01": {
+        "data": "s64",
+        "error": {},
+        "id": "BOOKING01",
+        "pagination": {},
+        "status": "s68",
+        "booking_id": "BOOKING01",
+        "seat_uid": "SEAT_UID01"
+      },
+      "BOOKING02": {
+        "data": "s96",
+        "error": {},
+        "id": "BOOKING02",
+        "pagination": {},
+        "status": "s9a",
+        "booking_id": "BOOKING01",
+        "seat_uid": "SEAT_UID01"
+      }
+    }
+  },
+  "new": {
+    "booking": {
+      "booking_ref01": {
+        "data": "sc8",
+        "error": {},
+        "pagination": {},
+        "status": "scc"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/bookings/{bookingUid}/reassign/{userId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/bookings/{bookingUid}/confirm": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/bookings/{bookingUid}/decline": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/bookings/{bookingUid}/guests": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/bookings/{bookingUid}/mark-absent": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/bookings/{bookingUid}/reassign": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/bookings/{bookingUid}/cancel": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/bookings/{bookingUid}/reschedule": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/bookings": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/bookings/{bookingUid}/calendar-links": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/bookings/{bookingUid}/conferencing-sessions": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/bookings/{bookingUid}/recordings": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/bookings/{bookingUid}/references": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/bookings/{bookingUid}/transcripts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/bookings": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/bookings/{bookingUid}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/bookings/by-seat/{seatUid}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/bookings/{bookingUid}/location": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

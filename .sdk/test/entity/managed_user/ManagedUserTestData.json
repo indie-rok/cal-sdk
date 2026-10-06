@@ -1,0 +1,99 @@
+{
+  "existing": {
+    "managed_user": {
+      "MANAGED_USER00": {
+        "avatarUrl": "s82",
+        "bio": "s83",
+        "createdDate": "s84",
+        "defaultScheduleId": 133,
+        "email": "s86",
+        "id": "MANAGED_USER00",
+        "locale": "s88",
+        "metadata": {},
+        "name": "s8a",
+        "timeFormat": 139,
+        "timeZone": "s8c",
+        "username": "s8d",
+        "weekStart": "s8e",
+        "oauth_client_id": "OAUTH_CLIENT01"
+      },
+      "MANAGED_USER01": {
+        "avatarUrl": "s104",
+        "bio": "s105",
+        "createdDate": "s106",
+        "defaultScheduleId": 263,
+        "email": "s108",
+        "id": "MANAGED_USER01",
+        "locale": "s10a",
+        "metadata": {},
+        "name": "s10c",
+        "timeFormat": 269,
+        "timeZone": "s10e",
+        "username": "s10f",
+        "weekStart": "s110",
+        "oauth_client_id": "OAUTH_CLIENT01"
+      },
+      "MANAGED_USER02": {
+        "avatarUrl": "s186",
+        "bio": "s187",
+        "createdDate": "s188",
+        "defaultScheduleId": 393,
+        "email": "s18a",
+        "id": "MANAGED_USER02",
+        "locale": "s18c",
+        "metadata": {},
+        "name": "s18e",
+        "timeFormat": 399,
+        "timeZone": "s190",
+        "username": "s191",
+        "weekStart": "s192",
+        "oauth_client_id": "OAUTH_CLIENT01"
+      }
+    }
+  },
+  "new": {
+    "managed_user": {
+      "managed_user_ref01": {
+        "avatarUrl": "s208",
+        "bio": "s209",
+        "createdDate": "s20a",
+        "defaultScheduleId": 523,
+        "email": "s20c",
+        "locale": "s20e",
+        "metadata": {},
+        "name": "s210",
+        "timeFormat": 529,
+        "timeZone": "s212",
+        "username": "s213",
+        "weekStart": "s214"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/oauth-clients/{clientId}/users": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/oauth-clients/{clientId}/users": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/oauth-clients/{clientId}/users/{userId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/oauth-clients/{clientId}/users/{userId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/oauth-clients/{clientId}/users/{userId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

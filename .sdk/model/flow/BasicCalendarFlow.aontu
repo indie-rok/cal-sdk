@@ -1,0 +1,53 @@
+# BasicCalendarFlow
+
+main: kit: flow: BasicCalendarFlow:
+{
+  entity: "calendar",
+  kind: "basic",
+  name: "BasicCalendarFlow",
+  step: [
+    {
+      i: {
+        ref: "calendar_ref01"
+      }
+
+      m: {
+        calendar_id: "calendar01",
+        connection_id: "connection01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "calendar_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "calendar_ref01",
+        srcdatavar: "calendar_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-calendar_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCalendarFlow"
+}

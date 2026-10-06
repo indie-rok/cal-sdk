@@ -1,0 +1,84 @@
+{
+  "existing": {
+    "event_type_webhook": {
+      "EVENT_TYPE_WEBHOOK00": {
+        "active": true,
+        "eventTypeId": 81,
+        "id": "EVENT_TYPE_WEBHOOK00",
+        "payloadTemplate": "s53",
+        "secret": "s54",
+        "subscriberUrl": "s55",
+        "triggers": [],
+        "version": "s57",
+        "event_type_id": "EVENT_TYPE01"
+      },
+      "EVENT_TYPE_WEBHOOK01": {
+        "active": true,
+        "eventTypeId": 161,
+        "id": "EVENT_TYPE_WEBHOOK01",
+        "payloadTemplate": "sa3",
+        "secret": "sa4",
+        "subscriberUrl": "sa5",
+        "triggers": [],
+        "version": "sa7",
+        "event_type_id": "EVENT_TYPE01"
+      },
+      "EVENT_TYPE_WEBHOOK02": {
+        "active": true,
+        "eventTypeId": 241,
+        "id": "EVENT_TYPE_WEBHOOK02",
+        "payloadTemplate": "sf3",
+        "secret": "sf4",
+        "subscriberUrl": "sf5",
+        "triggers": [],
+        "version": "sf7",
+        "event_type_id": "EVENT_TYPE01"
+      }
+    }
+  },
+  "new": {
+    "event_type_webhook": {
+      "event_type_webhook_ref01": {
+        "active": true,
+        "eventTypeId": 321,
+        "payloadTemplate": "s143",
+        "secret": "s144",
+        "subscriberUrl": "s145",
+        "triggers": [],
+        "version": "s147"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/event-types/{eventTypeId}/webhooks": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/event-types/{eventTypeId}/webhooks": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/event-types/{eventTypeId}/webhooks/{webhookId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/event-types/{eventTypeId}/webhooks/{webhookId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/event-types/{eventTypeId}/webhooks": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/event-types/{eventTypeId}/webhooks/{webhookId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

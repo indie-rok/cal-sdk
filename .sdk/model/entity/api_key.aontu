@@ -1,0 +1,85 @@
+# Entity: api_key
+
+main: kit: entity: api_key: {
+
+  alias: field: {}
+
+  fields: {
+    apiKey: {
+      h: "Api Key"
+      n: "apiKey"
+      r: true
+      t: "`$STRING`"
+    }
+    apiKeyDaysValid: {
+      h: "Api Key Days Valid"
+      n: "apiKeyDaysValid"
+      r: false
+      sh: "For how many days is managed organization api key valid."
+      t: "`$NUMBER`"
+    }
+    apiKeyNeverExpires: {
+      h: "Api Key Never Expires"
+      n: "apiKeyNeverExpires"
+      r: false
+      sh: "If true, organization api key never expires."
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  name: "api_key"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/api-keys/refresh"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/api-keys/refresh"
+          q: {
+            exist: [
+              "authorization"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "api-keys"
+            }
+            {
+              lit: "refresh"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

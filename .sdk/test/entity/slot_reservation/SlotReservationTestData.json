@@ -1,0 +1,71 @@
+{
+  "existing": {
+    "slot_reservation": {
+      "SLOT_RESERVATION00": {
+        "eventTypeId": 80,
+        "id": "SLOT_RESERVATION00",
+        "reservationDuration": 82,
+        "reservationUid": "s53",
+        "reservationUntil": "s54",
+        "slotDuration": 85,
+        "slotEnd": "s56",
+        "slotStart": "s57"
+      },
+      "SLOT_RESERVATION01": {
+        "eventTypeId": 160,
+        "id": "SLOT_RESERVATION01",
+        "reservationDuration": 162,
+        "reservationUid": "sa3",
+        "reservationUntil": "sa4",
+        "slotDuration": 165,
+        "slotEnd": "sa6",
+        "slotStart": "sa7"
+      },
+      "SLOT_RESERVATION02": {
+        "eventTypeId": 240,
+        "id": "SLOT_RESERVATION02",
+        "reservationDuration": 242,
+        "reservationUid": "sf3",
+        "reservationUntil": "sf4",
+        "slotDuration": 245,
+        "slotEnd": "sf6",
+        "slotStart": "sf7"
+      }
+    }
+  },
+  "new": {
+    "slot_reservation": {
+      "slot_reservation_ref01": {
+        "eventTypeId": 320,
+        "reservationDuration": 322,
+        "reservationUid": "s143",
+        "reservationUntil": "s144",
+        "slotDuration": 325,
+        "slotEnd": "s146",
+        "slotStart": "s147"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/slots/reservations": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/slots/reservations/{uid}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/slots/reservations/{uid}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/slots/reservations/{uid}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

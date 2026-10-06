@@ -1,0 +1,1572 @@
+# Entity: booking
+
+main: kit: entity: booking: {
+
+  alias: field: {}
+
+  fields: {
+    data: {
+      h: "Data"
+      n: "data"
+      r: true
+      sh: "Booking data, which can be either a BookingOutput object, a RecurringBookingOutput object, or an array of RecurringBookingOutput objects"
+      t: "`$ANY`"
+      union: {
+        branches: 6
+        count: 1
+        depth: 0
+      }
+    }
+    error: {
+      h: "Error"
+      n: "error"
+      r: false
+      t: "`$OBJECT`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    pagination: {
+      h: "Pagination"
+      n: "pagination"
+      r: true
+      t: "`$OBJECT`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "booking"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/bookings/{bookingUid}/reassign/{userId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-08-13"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "booking_id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "userId"
+                r: true
+                t: "`$NUMBER`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/bookings/{bookingUid}/reassign/{userId}"
+          q: {
+            "$action": "reassign"
+            exist: [
+              "authorization"
+              "booking_id"
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "booking_id"
+              userId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "booking_id"
+            }
+            {
+              lit: "reassign"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v2/bookings/{bookingUid}/confirm"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-08-13"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/bookings/{bookingUid}/confirm"
+          q: {
+            "$action": "confirm"
+            exist: [
+              "authorization"
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "confirm"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v2/bookings/{bookingUid}/decline"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-08-13"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/bookings/{bookingUid}/decline"
+          q: {
+            "$action": "decline"
+            exist: [
+              "authorization"
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "decline"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v2/bookings/{bookingUid}/guests"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "booking_id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/bookings/{bookingUid}/guests"
+          q: {
+            "$action": "guests"
+            exist: [
+              "authorization"
+              "booking_id"
+              "cal_api_version"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "booking_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "booking_id"
+            }
+            {
+              lit: "guests"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v2/bookings/{bookingUid}/mark-absent"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-08-13"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/bookings/{bookingUid}/mark-absent"
+          q: {
+            "$action": "mark_absent"
+            exist: [
+              "authorization"
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "mark-absent"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v2/bookings/{bookingUid}/reassign"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-08-13"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "booking_id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/bookings/{bookingUid}/reassign"
+          q: {
+            "$action": "reassign"
+            exist: [
+              "authorization"
+              "booking_id"
+              "cal_api_version"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "booking_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "booking_id"
+            }
+            {
+              lit: "reassign"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v2/bookings/{bookingUid}/cancel"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-08-13"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "x_cal_client_id"
+                or: "x-cal-client-id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/bookings/{bookingUid}/cancel"
+          q: {
+            "$action": "cancel"
+            exist: [
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "cancel"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v2/bookings/{bookingUid}/reschedule"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-08-13"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "x_cal_client_id"
+                or: "x-cal-client-id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/bookings/{bookingUid}/reschedule"
+          q: {
+            "$action": "reschedule"
+            exist: [
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "reschedule"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v2/bookings"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-08-13"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "x_cal_client_id"
+                or: "x-cal-client-id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/bookings"
+          q: {
+            exist: [
+              "cal_api_version"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/bookings/{bookingUid}/calendar-links"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-08-13"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "booking_id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/bookings/{bookingUid}/calendar-links"
+          q: {
+            "$action": "calendar_links"
+            exist: [
+              "authorization"
+              "booking_id"
+              "cal_api_version"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "booking_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "booking_id"
+            }
+            {
+              lit: "calendar-links"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/bookings/{bookingUid}/conferencing-sessions"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-08-13"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/bookings/{bookingUid}/conferencing-sessions"
+          q: {
+            "$action": "conferencing-sessions"
+            exist: [
+              "authorization"
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "conferencing-sessions"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/bookings/{bookingUid}/recordings"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-08-13"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/bookings/{bookingUid}/recordings"
+          q: {
+            "$action": "recordings"
+            exist: [
+              "authorization"
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "recordings"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/bookings/{bookingUid}/references"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-08-13"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "google_calendar"
+                k: "query"
+                n: "type"
+                or: "type"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/bookings/{bookingUid}/references"
+          q: {
+            "$action": "references"
+            exist: [
+              "authorization"
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "references"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/bookings/{bookingUid}/transcripts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-08-13"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/bookings/{bookingUid}/transcripts"
+          q: {
+            "$action": "transcripts"
+            exist: [
+              "authorization"
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "transcripts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/bookings"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-08-13"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "?afterCreatedAt=2025-03-07T10:00:00.000Z"
+                k: "query"
+                n: "after_created_at"
+                or: "afterCreatedAt"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "?afterStart=2025-03-07T10:00:00.000Z"
+                k: "query"
+                n: "after_start"
+                or: "afterStart"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "?afterUpdatedAt=2025-03-07T10:00:00.000Z"
+                k: "query"
+                n: "after_updated_at"
+                or: "afterUpdatedAt"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "example@domain.com"
+                k: "query"
+                n: "attendee_email"
+                or: "attendeeEmail"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "John Doe"
+                k: "query"
+                n: "attendee_name"
+                or: "attendeeName"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "?beforeCreatedAt=2025-03-14T11:00:00.000Z"
+                k: "query"
+                n: "before_created_at"
+                or: "beforeCreatedAt"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "?beforeEnd=2025-03-07T11:00:00.000Z"
+                k: "query"
+                n: "before_end"
+                or: "beforeEnd"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "?beforeUpdatedAt=2025-03-14T11:00:00.000Z"
+                k: "query"
+                n: "before_updated_at"
+                or: "beforeUpdatedAt"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2NtaeaVcKfpmSZ4CthFdfk"
+                k: "query"
+                n: "booking_uid"
+                or: "bookingUid"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "?eventTypeIds=100,200"
+                k: "query"
+                n: "event_type_id"
+                or: "eventTypeIds"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "?eventTypeId=100"
+                k: "query"
+                n: "event_type_id"
+                or: "eventTypeId"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "skip"
+                or: "skip"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: "?sortCreated=asc OR ?sortCreated=desc"
+                k: "query"
+                n: "sort_created"
+                or: "sortCreated"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "?sortEnd=asc OR ?sortEnd=desc"
+                k: "query"
+                n: "sort_end"
+                or: "sortEnd"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "?sortStart=asc OR ?sortStart=desc"
+                k: "query"
+                n: "sort_start"
+                or: "sortStart"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "?sortUpdated=asc OR ?sortUpdated=desc"
+                k: "query"
+                n: "sort_updated_at"
+                or: "sortUpdatedAt"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "?status=upcoming,past"
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "take"
+                or: "take"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: "?teamId=50"
+                k: "query"
+                n: "team_id"
+                or: "teamId"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "?teamIds=50,60"
+                k: "query"
+                n: "teams_id"
+                or: "teamsIds"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/bookings"
+          q: {
+            exist: [
+              "authorization"
+              "cal_api_version"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/bookings/{bookingUid}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-08-13"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "x_cal_client_id"
+                or: "x-cal-client-id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/bookings/{bookingUid}"
+          q: {
+            exist: [
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/bookings/by-seat/{seatUid}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-08-13"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "x_cal_client_id"
+                or: "x-cal-client-id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "seat_uid"
+                or: "seatUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/bookings/by-seat/{seatUid}"
+          q: {
+            "$action": "by_seat"
+            exist: [
+              "cal_api_version"
+              "seat_uid"
+            ]
+          }
+          r: {
+            param: {
+              seatUid: "seat_uid"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              lit: "by-seat"
+            }
+            {
+              var: "seat_uid"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /v2/bookings/{bookingUid}/location"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "bookingUid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/bookings/{bookingUid}/location"
+          q: {
+            "$action": "location"
+            exist: [
+              "authorization"
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              bookingUid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "bookings"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "location"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

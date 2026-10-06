@@ -1,0 +1,49 @@
+{
+  "existing": {
+    "selected_calendar": {
+      "SELECTED_CALENDAR00": {
+        "credentialId": 40,
+        "delegationCredentialId": "s29",
+        "externalId": "s2a",
+        "integration": "s2b",
+        "id": "SELECTED_CALENDAR00"
+      },
+      "SELECTED_CALENDAR01": {
+        "credentialId": 80,
+        "delegationCredentialId": "s51",
+        "externalId": "s52",
+        "integration": "s53",
+        "id": "SELECTED_CALENDAR01"
+      },
+      "SELECTED_CALENDAR02": {
+        "credentialId": 120,
+        "delegationCredentialId": "s79",
+        "externalId": "s7a",
+        "integration": "s7b",
+        "id": "SELECTED_CALENDAR02"
+      }
+    }
+  },
+  "new": {
+    "selected_calendar": {
+      "selected_calendar_ref01": {
+        "credentialId": 160,
+        "delegationCredentialId": "sa1",
+        "externalId": "sa2",
+        "integration": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/selected-calendars": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/selected-calendars": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

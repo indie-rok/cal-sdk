@@ -1,0 +1,76 @@
+{
+  "existing": {
+    "conferencing": {
+      "CONFERENCING00": {
+        "id": "CONFERENCING00",
+        "invalid": false,
+        "type": "s2a",
+        "userId": 43,
+        "app": "APP01",
+        "conferencing_id": "CONFERENCING01"
+      },
+      "CONFERENCING01": {
+        "id": "CONFERENCING01",
+        "invalid": false,
+        "type": "s52",
+        "userId": 83,
+        "app": "APP01",
+        "conferencing_id": "CONFERENCING01"
+      },
+      "CONFERENCING02": {
+        "id": "CONFERENCING02",
+        "invalid": false,
+        "type": "s7a",
+        "userId": 123,
+        "app": "APP01",
+        "conferencing_id": "CONFERENCING01"
+      }
+    }
+  },
+  "new": {
+    "conferencing": {
+      "conferencing_ref01": {
+        "invalid": false,
+        "type": "sa2",
+        "userId": 163
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/conferencing/{app}/connect": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/conferencing/{app}/default": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/conferencing": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/conferencing/{app}/oauth/auth-url": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/conferencing/{app}/oauth/callback": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/conferencing/default": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/conferencing/{app}/disconnect": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

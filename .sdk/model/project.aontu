@@ -1,0 +1,57 @@
+# Project overlay — YOURS. The scaffold creates this file once and never
+# overwrites it.
+#
+# Most of model/ is toolchain-derived and is deliberately regenerated so that
+# toolchain fixes propagate; this file, the guide, and the target, feature and
+# edition indexes are kept. Put anything here that is a decision about THIS
+# project rather than a fact about the API.
+#
+# Included LAST by sdk.aontu, after target/target-index.aontu, because a key
+# under main.kit.target.<t> can only refine a target that has already been
+# defined. Declared earlier, the model build fails with "Cannot unify value:
+# nil with value: string / key ext value was: nil", which names nothing that
+# would lead you here.
+#
+# The release version each generated manifest declares (package.json,
+# pyproject.toml, the gemspec, the rockspec) and that the port Makefiles tag:
+#
+#   main: kit: target: ts: publish: version: '1.2.3'
+#
+# Per target, because ports publish to different registries on different
+# clocks. Set every target to the same value for a lockstep repo.
+#
+# A published package name that does not follow the derivation:
+#
+#   main: kit: target: ts: publish: registry: package: '@scope/name'
+
+# README intro: say what this SDK abstracts, in plain words.
+main: kit: info: tagline: 'Book, schedule and manage Cal.com from code, without hand-writing HTTP calls.'
+main: kit: info: docs_url: 'https://cal.com/docs/api-reference/v2/introduction'
+main: kit: info: about_md: "Cal.com is open-source scheduling infrastructure. Its v2 REST API has\n121 operations across 82 URL paths. To call it directly you need to know,\nfor every request:\n\n- the URL path and HTTP method,\n- the `Authorization: Bearer <api key>` header,\n- the `cal-api-version` header, whose value differs per resource,\n- that the result comes back wrapped in a `{ status, data }` envelope.\n\nThis SDK hides that plumbing. You work with bookings, event types,\nschedules, slots, calendars and webhooks as objects with `load`, `list`,\n`create`, `update` and `remove`:\n\n| Without the SDK | With the SDK |\n| --- | --- |\n| `GET /v2/bookings/{bookingUid}` + headers + unwrap `data` | `client.Booking().load({ id })` |\n| `GET /v2/schedules` + headers + unwrap `data` | `client.Schedule().list()` |\n"
+
+# One-line descriptions for the README entity table.
+main: kit: info: entity_desc: {
+  api_key: 'Refresh the API key you are calling with.'
+  attendee: 'People on a booking: add, list, load and remove attendees.'
+  booking: 'Bookings: create, list, load, plus cancel, confirm, decline, reschedule and reassign actions.'
+  calendar: 'Connected calendar accounts, busy times and free/busy lookups.'
+  calendar_event: 'Events on a connected calendar (Google, Outlook, Apple).'
+  conferencing: 'Video conferencing apps: connect, set default, disconnect.'
+  destination_calendar: 'The calendar new bookings are written to.'
+  event_type: 'The kinds of meeting people can book with you.'
+  event_type_webhook: 'Webhooks scoped to one event type.'
+  managed_user: 'Users your platform OAuth client manages.'
+  me: 'The profile of the authenticated user.'
+  oauth_client: 'Platform OAuth clients.'
+  oauth_client_webhook: 'Webhooks scoped to one OAuth client.'
+  oauth_token: 'Exchange and refresh OAuth tokens.'
+  private_link: 'Private booking links for an event type.'
+  schedule: 'Availability schedules, including the default one.'
+  selected_calendar: 'Calendars checked for conflicts.'
+  slot: 'Available time slots for an event type.'
+  slot_reservation: 'Temporarily hold a slot while a booking is completed.'
+  stripe: 'Stripe connection status for paid bookings.'
+  verified_email: 'Email addresses verified for use in workflows.'
+  verified_phone: 'Phone numbers verified for use in workflows.'
+  webhook: 'User-level webhooks.'
+}

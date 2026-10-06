@@ -1,0 +1,491 @@
+# Entity: oauth_client
+
+main: kit: entity: oauth_client: {
+
+  alias: field: {}
+
+  fields: {
+    areCalendarEventsEnabled: {
+      h: "Are Calendar Events Enabled"
+      n: "areCalendarEventsEnabled"
+      op: {
+        create: {
+          req: false
+          type: "`$BOOLEAN`"
+        }
+        update: {
+          req: false
+          type: "`$BOOLEAN`"
+        }
+      }
+      r: true
+      sh: "If true and if managed user has calendar connected, calendar events will be created."
+      t: "`$BOOLEAN`"
+    }
+    areDefaultEventTypesEnabled: {
+      h: "Are Default Event Types Enabled"
+      n: "areDefaultEventTypesEnabled"
+      op: {
+        create: {
+          req: false
+          type: "`$BOOLEAN`"
+        }
+        update: {
+          req: false
+          type: "`$BOOLEAN`"
+        }
+      }
+      r: true
+      sh: "If enabled, when creating a managed user the managed user will have 4 default event types: 30 and 60 minutes without Cal video, 30 and 60 minutes with Cal video."
+      t: "`$BOOLEAN`"
+    }
+    areEmailsEnabled: {
+      h: "Are Emails Enabled"
+      n: "areEmailsEnabled"
+      op: {
+        create: {
+          req: false
+          type: "`$BOOLEAN`"
+        }
+        update: {
+          req: false
+          type: "`$BOOLEAN`"
+        }
+      }
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    bookingCancelRedirectUri: {
+      h: "Booking Cancel Redirect Uri"
+      n: "bookingCancelRedirectUri"
+      r: false
+      t: "`$STRING`"
+    }
+    bookingRedirectUri: {
+      h: "Booking Redirect Uri"
+      n: "bookingRedirectUri"
+      r: false
+      t: "`$STRING`"
+    }
+    bookingRescheduleRedirectUri: {
+      h: "Booking Reschedule Redirect Uri"
+      n: "bookingRescheduleRedirectUri"
+      r: false
+      t: "`$STRING`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    logo: {
+      h: "Logo"
+      n: "logo"
+      r: false
+      t: "`$OBJECT`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    organizationId: {
+      h: "Organization Id"
+      n: "organizationId"
+      r: true
+      t: "`$NUMBER`"
+    }
+    permissions: {
+      h: "Permissions"
+      n: "permissions"
+      r: true
+      sh: "Array of permission keys like [\"BOOKING_READ\", \"BOOKING_WRITE\"]"
+      t: "`$ARRAY`"
+    }
+    redirectUris: {
+      h: "Redirect Uris"
+      n: "redirectUris"
+      op: {
+        update: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      r: true
+      t: "`$ARRAY`"
+    }
+    secret: {
+      h: "Secret"
+      n: "secret"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "oauth_client"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/oauth-clients"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/oauth-clients"
+          q: {
+            exist: [
+              "authorization"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/oauth-clients"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/oauth-clients"
+          q: {
+            exist: [
+              "authorization"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/oauth-clients/{clientId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/oauth-clients/{clientId}"
+          q: {
+            exist: [
+              "authorization"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v2/auth/oauth2/clients/{clientId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "client_id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/auth/oauth2/clients/{clientId}"
+          q: {
+            "$action": "oauth2"
+            exist: [
+              "client_id"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "client_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "auth"
+            }
+            {
+              lit: "oauth2"
+            }
+            {
+              lit: "clients"
+            }
+            {
+              var: "client_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v2/oauth-clients/{clientId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v2/oauth-clients/{clientId}"
+          q: {
+            exist: [
+              "authorization"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /v2/oauth-clients/{clientId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/oauth-clients/{clientId}"
+          q: {
+            exist: [
+              "authorization"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,119 @@
+# BasicCalendarEventFlow
+
+main: kit: flow: BasicCalendarEventFlow:
+{
+  entity: "calendar_event",
+  kind: "basic",
+  name: "BasicCalendarEventFlow",
+  step: [
+    {
+      i: {
+        ref: "calendar_event_ref01"
+      }
+
+      m: {
+        calendar_provider: "calendar_provider01",
+        connection_id: "connection01"
+      }
+
+      o: "create"
+    }
+
+    {
+      m: {
+        connection_id: "connection01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "calendar_event_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      d: {
+        calendar_provider: "calendar_provider01"
+      }
+
+      i: {
+        ref: "calendar_event_ref01",
+        srcdatavar: "calendar_event_ref01_data",
+        suffix: "_up0",
+        textfield: "description"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-calendar_event_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "calendar_event_ref01",
+        srcdatavar: "calendar_event_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        calendar_provider: "calendar_provider01",
+        id: "calendar_event01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-calendar_event_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "calendar_event_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        connection_id: "connection01",
+        id: "calendar_event01"
+      }
+
+      o: "remove"
+    }
+
+    {
+      i: {
+        suffix: "_rt0"
+      }
+
+      m: {
+        connection_id: "connection01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "calendar_event_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCalendarEventFlow"
+}

@@ -1,0 +1,97 @@
+{
+  "existing": {
+    "calendar": {
+      "CALENDAR00": {
+        "connectedCalendars": [],
+        "destinationCalendar": {},
+        "id": "CALENDAR00",
+        "calendar_id": "CALENDAR01",
+        "connection_id": "CONNECTION01"
+      },
+      "CALENDAR01": {
+        "connectedCalendars": [],
+        "destinationCalendar": {},
+        "id": "CALENDAR01",
+        "calendar_id": "CALENDAR01",
+        "connection_id": "CONNECTION01"
+      },
+      "CALENDAR02": {
+        "connectedCalendars": [],
+        "destinationCalendar": {},
+        "id": "CALENDAR02",
+        "calendar_id": "CALENDAR01",
+        "connection_id": "CONNECTION01"
+      }
+    }
+  },
+  "new": {
+    "calendar": {
+      "calendar_ref01": {
+        "connectedCalendars": [],
+        "destinationCalendar": {}
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/calendars/{calendar}/credentials": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/calendars/{calendar}/disconnect": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/calendars/ics-feed/save": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/calendars/{calendar}/freebusy": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/calendars/connections/{connectionId}/freebusy": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/calendars/busy-times": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/calendars/{calendar}/connect": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/calendars/{calendar}/save": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/calendars/{calendar}/check": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/calendars": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/calendars/ics-feed/check": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/calendars/connections": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

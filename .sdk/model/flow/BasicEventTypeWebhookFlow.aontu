@@ -1,0 +1,117 @@
+# BasicEventTypeWebhookFlow
+
+main: kit: flow: BasicEventTypeWebhookFlow:
+{
+  entity: "event_type_webhook",
+  kind: "basic",
+  name: "BasicEventTypeWebhookFlow",
+  step: [
+    {
+      i: {
+        ref: "event_type_webhook_ref01"
+      }
+
+      m: {
+        event_type_id: "event_type01"
+      }
+
+      o: "create"
+    }
+
+    {
+      m: {
+        event_type_id: "event_type01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "event_type_webhook_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      d: {
+        event_type_id: "event_type01"
+      }
+
+      i: {
+        ref: "event_type_webhook_ref01",
+        srcdatavar: "event_type_webhook_ref01_data",
+        suffix: "_up0",
+        textfield: "payloadTemplate"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-event_type_webhook_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "event_type_webhook_ref01",
+        srcdatavar: "event_type_webhook_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        event_type_id: "event_type01",
+        id: "event_type_webhook01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-event_type_webhook_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "event_type_webhook_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "event_type_webhook01"
+      }
+
+      o: "remove"
+    }
+
+    {
+      i: {
+        suffix: "_rt0"
+      }
+
+      m: {
+        event_type_id: "event_type01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "event_type_webhook_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicEventTypeWebhookFlow"
+}

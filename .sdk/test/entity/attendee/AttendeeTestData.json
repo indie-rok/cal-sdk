@@ -1,0 +1,74 @@
+{
+  "existing": {
+    "attendee": {
+      "ATTENDEE00": {
+        "absent": true,
+        "displayEmail": "s51",
+        "email": "s52",
+        "id": "ATTENDEE00",
+        "language": "s54",
+        "name": "s55",
+        "phoneNumber": "s56",
+        "timeZone": "s57",
+        "booking_id": "BOOKING01"
+      },
+      "ATTENDEE01": {
+        "absent": true,
+        "displayEmail": "sa1",
+        "email": "sa2",
+        "id": "ATTENDEE01",
+        "language": "sa4",
+        "name": "sa5",
+        "phoneNumber": "sa6",
+        "timeZone": "sa7",
+        "booking_id": "BOOKING01"
+      },
+      "ATTENDEE02": {
+        "absent": true,
+        "displayEmail": "sf1",
+        "email": "sf2",
+        "id": "ATTENDEE02",
+        "language": "sf4",
+        "name": "sf5",
+        "phoneNumber": "sf6",
+        "timeZone": "sf7",
+        "booking_id": "BOOKING01"
+      }
+    }
+  },
+  "new": {
+    "attendee": {
+      "attendee_ref01": {
+        "absent": true,
+        "displayEmail": "s141",
+        "email": "s142",
+        "language": "s144",
+        "name": "s145",
+        "phoneNumber": "s146",
+        "timeZone": "s147"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/bookings/{bookingUid}/attendees": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/bookings/{bookingUid}/attendees": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/bookings/{bookingUid}/attendees/{attendeeId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/bookings/{bookingUid}/attendees/{attendeeId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

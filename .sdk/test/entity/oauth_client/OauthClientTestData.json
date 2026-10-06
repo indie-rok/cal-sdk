@@ -1,0 +1,108 @@
+{
+  "existing": {
+    "oauth_client": {
+      "OAUTH_CLIENT00": {
+        "areCalendarEventsEnabled": true,
+        "areDefaultEventTypesEnabled": false,
+        "areEmailsEnabled": true,
+        "bookingCancelRedirectUri": "s8f",
+        "bookingRedirectUri": "s90",
+        "bookingRescheduleRedirectUri": "s91",
+        "createdAt": "s92",
+        "id": "OAUTH_CLIENT00",
+        "logo": {},
+        "name": "s95",
+        "organizationId": 150,
+        "permissions": [],
+        "redirectUris": [],
+        "secret": "s99",
+        "client_id": "CLIENT01"
+      },
+      "OAUTH_CLIENT01": {
+        "areCalendarEventsEnabled": true,
+        "areDefaultEventTypesEnabled": false,
+        "areEmailsEnabled": true,
+        "bookingCancelRedirectUri": "s11b",
+        "bookingRedirectUri": "s11c",
+        "bookingRescheduleRedirectUri": "s11d",
+        "createdAt": "s11e",
+        "id": "OAUTH_CLIENT01",
+        "logo": {},
+        "name": "s121",
+        "organizationId": 290,
+        "permissions": [],
+        "redirectUris": [],
+        "secret": "s125",
+        "client_id": "CLIENT01"
+      },
+      "OAUTH_CLIENT02": {
+        "areCalendarEventsEnabled": true,
+        "areDefaultEventTypesEnabled": false,
+        "areEmailsEnabled": true,
+        "bookingCancelRedirectUri": "s1a7",
+        "bookingRedirectUri": "s1a8",
+        "bookingRescheduleRedirectUri": "s1a9",
+        "createdAt": "s1aa",
+        "id": "OAUTH_CLIENT02",
+        "logo": {},
+        "name": "s1ad",
+        "organizationId": 430,
+        "permissions": [],
+        "redirectUris": [],
+        "secret": "s1b1",
+        "client_id": "CLIENT01"
+      }
+    }
+  },
+  "new": {
+    "oauth_client": {
+      "oauth_client_ref01": {
+        "areCalendarEventsEnabled": true,
+        "areDefaultEventTypesEnabled": false,
+        "areEmailsEnabled": true,
+        "bookingCancelRedirectUri": "s233",
+        "bookingRedirectUri": "s234",
+        "bookingRescheduleRedirectUri": "s235",
+        "createdAt": "s236",
+        "logo": {},
+        "name": "s239",
+        "organizationId": 570,
+        "permissions": [],
+        "redirectUris": [],
+        "secret": "s23d"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/oauth-clients": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/oauth-clients": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/oauth-clients/{clientId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/auth/oauth2/clients/{clientId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/oauth-clients/{clientId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/oauth-clients/{clientId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

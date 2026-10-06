@@ -1,0 +1,356 @@
+# Entity: slot_reservation
+
+main: kit: entity: slot_reservation: {
+
+  alias: field: {}
+
+  fields: {
+    eventTypeId: {
+      h: "Event Type Id"
+      n: "eventTypeId"
+      r: true
+      sh: "The ID of the event type for which slot should be reserved."
+      t: "`$NUMBER`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    reservationDuration: {
+      h: "Reservation Duration"
+      n: "reservationDuration"
+      op: {
+        update: {
+          req: true
+          type: "`$NUMBER`"
+        }
+      }
+      r: false
+      sh: "ONLY for authenticated requests with api key, access token or OAuth credentials (ID + secret)."
+      t: "`$NUMBER`"
+    }
+    reservationUid: {
+      h: "Reservation Uid"
+      n: "reservationUid"
+      r: true
+      sh: "The unique identifier of the reservation."
+      t: "`$STRING`"
+    }
+    reservationUntil: {
+      h: "Reservation Until"
+      n: "reservationUntil"
+      r: true
+      sh: "ISO 8601 datestring in UTC timezone representing time until which the slot is reserved."
+      t: "`$STRING`"
+    }
+    slotDuration: {
+      h: "Slot Duration"
+      n: "slotDuration"
+      op: {
+        update: {
+          req: true
+          type: "`$NUMBER`"
+        }
+      }
+      r: false
+      sh: "By default slot duration is equal to event type length, but if you want to reserve a slot for an event type that has a variable length you can specify it here as a number in minutes."
+      t: "`$NUMBER`"
+    }
+    slotEnd: {
+      h: "Slot End"
+      n: "slotEnd"
+      r: true
+      sh: "ISO 8601 datestring in UTC timezone representing slot end."
+      t: "`$STRING`"
+    }
+    slotStart: {
+      h: "Slot Start"
+      n: "slotStart"
+      r: true
+      sh: "ISO 8601 datestring in UTC timezone representing available slot."
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "slot_reservation"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/slots/reservations"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-09-04"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "x_cal_client_id"
+                or: "x-cal-client-id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/slots/reservations"
+          q: {
+            exist: [
+              "cal_api_version"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "slots"
+            }
+            {
+              lit: "reservations"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/slots/reservations/{uid}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                ex: "2024-09-04"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "uid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/slots/reservations/{uid}"
+          q: {
+            exist: [
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              uid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "slots"
+            }
+            {
+              lit: "reservations"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v2/slots/reservations/{uid}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                ex: "2024-09-04"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "uid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v2/slots/reservations/{uid}"
+          q: {
+            exist: [
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              uid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "slots"
+            }
+            {
+              lit: "reservations"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /v2/slots/reservations/{uid}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                ex: "2024-09-04"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "uid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/slots/reservations/{uid}"
+          q: {
+            exist: [
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              uid: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "slots"
+            }
+            {
+              lit: "reservations"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

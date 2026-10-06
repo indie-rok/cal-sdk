@@ -1,0 +1,52 @@
+# BasicVerifiedEmailFlow
+
+main: kit: flow: BasicVerifiedEmailFlow:
+{
+  entity: "verified_email",
+  kind: "basic",
+  name: "BasicVerifiedEmailFlow",
+  step: [
+    {
+      i: {
+        ref: "verified_email_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "verified_email_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "verified_email_ref01",
+        srcdatavar: "verified_email_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "verified_email01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-verified_email_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicVerifiedEmailFlow"
+}

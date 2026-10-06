@@ -1,0 +1,52 @@
+# BasicVerifiedPhoneFlow
+
+main: kit: flow: BasicVerifiedPhoneFlow:
+{
+  entity: "verified_phone",
+  kind: "basic",
+  name: "BasicVerifiedPhoneFlow",
+  step: [
+    {
+      i: {
+        ref: "verified_phone_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "verified_phone_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "verified_phone_ref01",
+        srcdatavar: "verified_phone_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "verified_phone01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-verified_phone_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicVerifiedPhoneFlow"
+}

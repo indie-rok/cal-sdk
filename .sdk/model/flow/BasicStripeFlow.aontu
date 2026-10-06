@@ -1,0 +1,28 @@
+# BasicStripeFlow
+
+main: kit: flow: BasicStripeFlow:
+{
+  entity: "stripe",
+  kind: "basic",
+  name: "BasicStripeFlow",
+  step: [
+    {
+      i: {
+        ref: "stripe_ref01",
+        srcdatavar: "stripe_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-stripe_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicStripeFlow"
+}

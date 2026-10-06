@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "api_key": {
+      "API_KEY00": {
+        "apiKey": "s1e",
+        "apiKeyDaysValid": 31,
+        "apiKeyNeverExpires": true,
+        "id": "API_KEY00"
+      },
+      "API_KEY01": {
+        "apiKey": "s3c",
+        "apiKeyDaysValid": 61,
+        "apiKeyNeverExpires": true,
+        "id": "API_KEY01"
+      },
+      "API_KEY02": {
+        "apiKey": "s5a",
+        "apiKeyDaysValid": 91,
+        "apiKeyNeverExpires": true,
+        "id": "API_KEY02"
+      }
+    }
+  },
+  "new": {
+    "api_key": {
+      "api_key_ref01": {
+        "apiKey": "s78",
+        "apiKeyDaysValid": 121,
+        "apiKeyNeverExpires": true
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/api-keys/refresh": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

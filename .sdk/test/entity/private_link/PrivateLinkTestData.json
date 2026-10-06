@@ -1,0 +1,62 @@
+{
+  "existing": {
+    "private_link": {
+      "PRIVATE_LINK00": {
+        "data": [],
+        "expiresAt": "s33",
+        "id": "PRIVATE_LINK00",
+        "maxUsageCount": 53,
+        "status": "s36",
+        "event_type_id": "EVENT_TYPE01"
+      },
+      "PRIVATE_LINK01": {
+        "data": [],
+        "expiresAt": "s65",
+        "id": "PRIVATE_LINK01",
+        "maxUsageCount": 103,
+        "status": "s68",
+        "event_type_id": "EVENT_TYPE01"
+      },
+      "PRIVATE_LINK02": {
+        "data": [],
+        "expiresAt": "s97",
+        "id": "PRIVATE_LINK02",
+        "maxUsageCount": 153,
+        "status": "s9a",
+        "event_type_id": "EVENT_TYPE01"
+      }
+    }
+  },
+  "new": {
+    "private_link": {
+      "private_link_ref01": {
+        "data": [],
+        "expiresAt": "sc9",
+        "maxUsageCount": 203,
+        "status": "scc"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/event-types/{eventTypeId}/private-links": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/event-types/{eventTypeId}/private-links": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/event-types/{eventTypeId}/private-links/{linkId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/event-types/{eventTypeId}/private-links/{linkId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

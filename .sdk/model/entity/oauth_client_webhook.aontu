@@ -1,0 +1,553 @@
+# Entity: oauth_client_webhook
+
+main: kit: entity: oauth_client_webhook: {
+
+  alias: field: {}
+
+  fields: {
+    active: {
+      h: "Active"
+      n: "active"
+      op: {
+        update: {
+          req: false
+          type: "`$BOOLEAN`"
+        }
+      }
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$NUMBER`"
+    }
+    oAuthClientId: {
+      h: "O Auth Client Id"
+      n: "oAuthClientId"
+      r: true
+      t: "`$STRING`"
+    }
+    payloadTemplate: {
+      h: "Payload Template"
+      n: "payloadTemplate"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "The template of the payload that will be sent to the subscriberUrl, check cal.com/docs/core-features/webhooks for more information"
+      t: "`$STRING`"
+    }
+    secret: {
+      h: "Secret"
+      n: "secret"
+      r: false
+      t: "`$STRING`"
+    }
+    subscriberUrl: {
+      h: "Subscriber Url"
+      n: "subscriberUrl"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    triggers: {
+      h: "Triggers"
+      n: "triggers"
+      op: {
+        update: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      r: true
+      t: "`$ARRAY`"
+    }
+    version: {
+      h: "Version"
+      n: "version"
+      r: false
+      sh: "The version of the webhook"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "oauth_client_webhook"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/oauth-clients/{clientId}/webhooks"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "oauth_client_id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/oauth-clients/{clientId}/webhooks"
+          q: {
+            exist: [
+              "oauth_client_id"
+              "x_cal_secret_key"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "oauth_client_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+            {
+              var: "oauth_client_id"
+            }
+            {
+              lit: "webhooks"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/oauth-clients/{clientId}/webhooks"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "oauth_client_id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: 0
+                k: "query"
+                n: "skip"
+                or: "skip"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: 25
+                k: "query"
+                n: "take"
+                or: "take"
+                r: false
+                t: "`$NUMBER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/oauth-clients/{clientId}/webhooks"
+          q: {
+            exist: [
+              "oauth_client_id"
+              "x_cal_secret_key"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "oauth_client_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+            {
+              var: "oauth_client_id"
+            }
+            {
+              lit: "webhooks"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/oauth-clients/{clientId}/webhooks/{webhookId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "webhookId"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "oauth_client_id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/oauth-clients/{clientId}/webhooks/{webhookId}"
+          q: {
+            exist: [
+              "id"
+              "oauth_client_id"
+              "x_cal_secret_key"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "oauth_client_id"
+              webhookId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+            {
+              var: "oauth_client_id"
+            }
+            {
+              lit: "webhooks"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v2/oauth-clients/{clientId}/webhooks/{webhookId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "webhookId"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "oauth_client_id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v2/oauth-clients/{clientId}/webhooks/{webhookId}"
+          q: {
+            exist: [
+              "id"
+              "oauth_client_id"
+              "x_cal_secret_key"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "oauth_client_id"
+              webhookId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+            {
+              var: "oauth_client_id"
+            }
+            {
+              lit: "webhooks"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          co: {
+            id: "DELETE /v2/oauth-clients/{clientId}/webhooks"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "oauth_client_id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v2/oauth-clients/{clientId}/webhooks"
+          q: {
+            exist: [
+              "oauth_client_id"
+              "x_cal_secret_key"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "oauth_client_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+            {
+              var: "oauth_client_id"
+            }
+            {
+              lit: "webhooks"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /v2/oauth-clients/{clientId}/webhooks/{webhookId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "webhookId"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "oauth_client_id"
+                or: "clientId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/oauth-clients/{clientId}/webhooks/{webhookId}"
+          q: {
+            exist: [
+              "id"
+              "oauth_client_id"
+              "x_cal_secret_key"
+            ]
+          }
+          r: {
+            param: {
+              clientId: "oauth_client_id"
+              webhookId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "oauth-clients"
+            }
+            {
+              var: "oauth_client_id"
+            }
+            {
+              lit: "webhooks"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.oauth_client")]
+  ]
+
+}

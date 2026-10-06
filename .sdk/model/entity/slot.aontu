@@ -1,0 +1,163 @@
+# Entity: slot
+
+main: kit: entity: slot: {
+
+  alias: field: {}
+
+  name: "slot"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/slots"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                ex: "2024-09-04"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "abc123def456"
+                k: "query"
+                n: "booking_uid_to_reschedule"
+                or: "bookingUidToReschedule"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "60"
+                k: "query"
+                n: "duration"
+                or: "duration"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: "2050-09-06"
+                k: "query"
+                n: "end"
+                or: "end"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "100"
+                k: "query"
+                n: "event_type_id"
+                or: "eventTypeId"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: "event-type-slug"
+                k: "query"
+                n: "event_type_slug"
+                or: "eventTypeSlug"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "range"
+                k: "query"
+                n: "format"
+                or: "format"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "org-slug"
+                k: "query"
+                n: "organization_slug"
+                or: "organizationSlug"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2050-09-05"
+                k: "query"
+                n: "start"
+                or: "start"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "team-slug"
+                k: "query"
+                n: "team_slug"
+                or: "teamSlug"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "Europe/Rome"
+                k: "query"
+                n: "time_zone"
+                or: "timeZone"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "bob"
+                k: "query"
+                n: "username"
+                or: "username"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "alice,bob"
+                k: "query"
+                n: "username"
+                or: "usernames"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/slots"
+          q: {
+            exist: [
+              "cal_api_version"
+              "end"
+              "start"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "slots"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

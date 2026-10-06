@@ -1,0 +1,100 @@
+# BasicOauthClientFlow
+
+main: kit: flow: BasicOauthClientFlow:
+{
+  entity: "oauth_client",
+  kind: "basic",
+  name: "BasicOauthClientFlow",
+  step: [
+    {
+      i: {
+        ref: "oauth_client_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "oauth_client_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "oauth_client_ref01",
+        srcdatavar: "oauth_client_ref01_data",
+        suffix: "_up0",
+        textfield: "bookingCancelRedirectUri"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-oauth_client_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "oauth_client_ref01",
+        srcdatavar: "oauth_client_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "oauth_client01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-oauth_client_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "oauth_client_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "oauth_client01"
+      }
+
+      o: "remove"
+    }
+
+    {
+      i: {
+        suffix: "_rt0"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "oauth_client_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicOauthClientFlow"
+}

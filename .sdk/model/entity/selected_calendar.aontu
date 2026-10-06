@@ -1,0 +1,165 @@
+# Entity: selected_calendar
+
+main: kit: entity: selected_calendar: {
+
+  alias: field: {}
+
+  fields: {
+    credentialId: {
+      h: "Credential Id"
+      n: "credentialId"
+      r: true
+      t: "`$NUMBER`"
+    }
+    delegationCredentialId: {
+      h: "Delegation Credential Id"
+      n: "delegationCredentialId"
+      r: false
+      t: "`$STRING`"
+    }
+    externalId: {
+      h: "External Id"
+      n: "externalId"
+      r: true
+      t: "`$STRING`"
+    }
+    integration: {
+      h: "Integration"
+      n: "integration"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "selected_calendar"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/selected-calendars"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/selected-calendars"
+          q: {
+            exist: [
+              "authorization"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "selected-calendars"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v2/selected-calendars"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "credential_id"
+                or: "credentialId"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "delegation_credential_id"
+                or: "delegationCredentialId"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "external_id"
+                or: "externalId"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "integration"
+                or: "integration"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v2/selected-calendars"
+          q: {
+            exist: [
+              "authorization"
+              "credential_id"
+              "external_id"
+              "integration"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "selected-calendars"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,84 @@
+{
+  "existing": {
+    "oauth_client_webhook": {
+      "OAUTH_CLIENT_WEBHOOK00": {
+        "active": true,
+        "id": "OAUTH_CLIENT_WEBHOOK00",
+        "oAuthClientId": "s52",
+        "payloadTemplate": "s53",
+        "secret": "s54",
+        "subscriberUrl": "s55",
+        "triggers": [],
+        "version": "s57",
+        "oauth_client_id": "OAUTH_CLIENT01"
+      },
+      "OAUTH_CLIENT_WEBHOOK01": {
+        "active": true,
+        "id": "OAUTH_CLIENT_WEBHOOK01",
+        "oAuthClientId": "sa2",
+        "payloadTemplate": "sa3",
+        "secret": "sa4",
+        "subscriberUrl": "sa5",
+        "triggers": [],
+        "version": "sa7",
+        "oauth_client_id": "OAUTH_CLIENT01"
+      },
+      "OAUTH_CLIENT_WEBHOOK02": {
+        "active": true,
+        "id": "OAUTH_CLIENT_WEBHOOK02",
+        "oAuthClientId": "sf2",
+        "payloadTemplate": "sf3",
+        "secret": "sf4",
+        "subscriberUrl": "sf5",
+        "triggers": [],
+        "version": "sf7",
+        "oauth_client_id": "OAUTH_CLIENT01"
+      }
+    }
+  },
+  "new": {
+    "oauth_client_webhook": {
+      "oauth_client_webhook_ref01": {
+        "active": true,
+        "oAuthClientId": "s142",
+        "payloadTemplate": "s143",
+        "secret": "s144",
+        "subscriberUrl": "s145",
+        "triggers": [],
+        "version": "s147"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/oauth-clients/{clientId}/webhooks": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/oauth-clients/{clientId}/webhooks": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/oauth-clients/{clientId}/webhooks/{webhookId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/oauth-clients/{clientId}/webhooks/{webhookId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/oauth-clients/{clientId}/webhooks": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/oauth-clients/{clientId}/webhooks/{webhookId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "existing": {
+    "destination_calendar": {
+      "DESTINATION_CALENDAR00": {
+        "credentialId": 50,
+        "delegationCredentialId": "s33",
+        "externalId": "s34",
+        "integration": "s35",
+        "userId": 54,
+        "id": "DESTINATION_CALENDAR00"
+      },
+      "DESTINATION_CALENDAR01": {
+        "credentialId": 100,
+        "delegationCredentialId": "s65",
+        "externalId": "s66",
+        "integration": "s67",
+        "userId": 104,
+        "id": "DESTINATION_CALENDAR01"
+      },
+      "DESTINATION_CALENDAR02": {
+        "credentialId": 150,
+        "delegationCredentialId": "s97",
+        "externalId": "s98",
+        "integration": "s99",
+        "userId": 154,
+        "id": "DESTINATION_CALENDAR02"
+      }
+    }
+  },
+  "new": {
+    "destination_calendar": {
+      "destination_calendar_ref01": {
+        "credentialId": 200,
+        "delegationCredentialId": "sc9",
+        "externalId": "sca",
+        "integration": "scb",
+        "userId": 204
+      }
+    }
+  },
+  "requests": {
+    "PUT /v2/destination-calendars": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

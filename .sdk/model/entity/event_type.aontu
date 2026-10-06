@@ -1,0 +1,940 @@
+# Entity: event_type
+
+main: kit: entity: event_type: {
+
+  alias: field: {}
+
+  fields: {
+    afterEventBuffer: {
+      h: "After Event Buffer"
+      n: "afterEventBuffer"
+      r: false
+      sh: "Extra time automatically blocked on your calendar after a meeting ends."
+      t: "`$NUMBER`"
+    }
+    allowReschedulingCancelledBookings: {
+      h: "Allow Rescheduling Cancelled Bookings"
+      n: "allowReschedulingCancelledBookings"
+      r: false
+      sh: "When enabled, users will be able to create a new booking when trying to reschedule a cancelled booking."
+      t: "`$BOOLEAN`"
+    }
+    allowReschedulingPastBookings: {
+      h: "Allow Rescheduling Past Bookings"
+      n: "allowReschedulingPastBookings"
+      r: false
+      sh: "Enabling this option allows for past events to be rescheduled."
+      t: "`$BOOLEAN`"
+    }
+    beforeEventBuffer: {
+      h: "Before Event Buffer"
+      n: "beforeEventBuffer"
+      r: false
+      sh: "Extra time automatically blocked on your calendar before a meeting starts."
+      t: "`$NUMBER`"
+    }
+    bookerActiveBookingsLimit: {
+      h: "Booker Active Bookings Limit"
+      n: "bookerActiveBookingsLimit"
+      r: false
+      sh: "Limit the number of active bookings a booker can make for this event type."
+      t: "`$ANY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 0
+      }
+    }
+    bookerLayouts: {
+      h: "Booker Layouts"
+      n: "bookerLayouts"
+      op: {
+        list: {
+          req: true
+          type: "`$OBJECT`"
+        }
+        update: {
+          req: true
+          type: "`$OBJECT`"
+        }
+      }
+      r: false
+      sh: "Should booker have week, month or column view."
+      t: "`$ANY`"
+    }
+    bookingFields: {
+      h: "Booking Fields"
+      n: "bookingFields"
+      op: {
+        list: {
+          req: true
+          type: "`$ARRAY`"
+        }
+        update: {
+          req: true
+          type: "`$ARRAY`"
+        }
+      }
+      r: false
+      sh: "Custom fields that can be added to the booking form when the event is booked by someone."
+      t: "`$ARRAY`"
+      union: {
+        branches: 19
+        count: 1
+        depth: 1
+      }
+    }
+    bookingLimitsCount: {
+      h: "Booking Limits Count"
+      n: "bookingLimitsCount"
+      r: false
+      sh: "Limit how many times this event can be booked"
+      t: "`$ANY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 0
+      }
+    }
+    bookingLimitsDuration: {
+      h: "Booking Limits Duration"
+      n: "bookingLimitsDuration"
+      r: false
+      sh: "Limit total amount of time that this event can be booked"
+      t: "`$ANY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 0
+      }
+    }
+    bookingRequiresAuthentication: {
+      h: "Booking Requires Authentication"
+      n: "bookingRequiresAuthentication"
+      op: {
+        list: {
+          req: true
+          type: "`$BOOLEAN`"
+        }
+        update: {
+          req: true
+          type: "`$BOOLEAN`"
+        }
+      }
+      r: false
+      sh: "Boolean to require authentication for booking this event type via api."
+      t: "`$BOOLEAN`"
+    }
+    bookingUrl: {
+      fo: "uri"
+      h: "Booking Url"
+      n: "bookingUrl"
+      r: true
+      sh: "Full URL to the booking page for this event type"
+      t: "`$STRING`"
+    }
+    bookingWindow: {
+      h: "Booking Window"
+      n: "bookingWindow"
+      r: false
+      sh: "Limit how far in the future this event can be booked"
+      t: "`$ANY`"
+      union: {
+        branches: 4
+        count: 1
+        depth: 0
+      }
+    }
+    calVideoSettings: {
+      h: "Cal Video Settings"
+      n: "calVideoSettings"
+      r: false
+      sh: "Cal video settings for the event type."
+      t: "`$ANY`"
+    }
+    color: {
+      h: "Color"
+      n: "color"
+      r: true
+      t: "`$OBJECT`"
+    }
+    confirmationPolicy: {
+      h: "Confirmation Policy"
+      n: "confirmationPolicy"
+      r: false
+      sh: "Specify how the booking needs to be manually confirmed before it is pushed to the integrations and a confirmation mail is sent."
+      t: "`$ANY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 0
+      }
+    }
+    currency: {
+      h: "Currency"
+      n: "currency"
+      r: true
+      t: "`$STRING`"
+    }
+    customName: {
+      h: "Custom Name"
+      n: "customName"
+      r: false
+      sh: "Customizable event name with valid variables: {Event type title}, {Organiser}, {Scheduler}, {Location}, {Organiser first name}, {Scheduler first name}, {Scheduler last name}, {Event duration}, {LOCATION}, {HOST/ATTENDEE}, {HOST}, {ATTENDEE…"
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      op: {
+        list: {
+          req: true
+          type: "`$STRING`"
+        }
+        update: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$STRING`"
+    }
+    destinationCalendar: {
+      h: "Destination Calendar"
+      n: "destinationCalendar"
+      r: true
+      t: "`$OBJECT`"
+    }
+    disableCancelling: {
+      h: "Disable Cancelling"
+      n: "disableCancelling"
+      r: false
+      sh: "Settings for disabling cancelling of this event type."
+      t: "`$ANY`"
+    }
+    disableGuests: {
+      h: "Disable Guests"
+      n: "disableGuests"
+      op: {
+        list: {
+          req: true
+          type: "`$BOOLEAN`"
+        }
+        update: {
+          req: true
+          type: "`$BOOLEAN`"
+        }
+      }
+      r: false
+      sh: "If true, person booking this event can't add guests via their emails."
+      t: "`$BOOLEAN`"
+    }
+    disableRescheduling: {
+      h: "Disable Rescheduling"
+      n: "disableRescheduling"
+      r: false
+      sh: "Settings for disabling rescheduling of this event type."
+      t: "`$ANY`"
+    }
+    forwardParamsSuccessRedirect: {
+      h: "Forward Params Success Redirect"
+      n: "forwardParamsSuccessRedirect"
+      r: true
+      t: "`$OBJECT`"
+    }
+    hidden: {
+      h: "Hidden"
+      n: "hidden"
+      op: {
+        list: {
+          req: true
+          type: "`$BOOLEAN`"
+        }
+        update: {
+          req: true
+          type: "`$BOOLEAN`"
+        }
+      }
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    hideCalendarEventDetails: {
+      h: "Hide Calendar Event Details"
+      n: "hideCalendarEventDetails"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    hideCalendarNotes: {
+      h: "Hide Calendar Notes"
+      n: "hideCalendarNotes"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    hideOrganizerEmail: {
+      h: "Hide Organizer Email"
+      n: "hideOrganizerEmail"
+      r: false
+      sh: "Boolean to Hide organizer's email address from the booking screen, email notifications, and calendar events"
+      t: "`$BOOLEAN`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$NUMBER`"
+    }
+    interfaceLanguage: {
+      h: "Interface Language"
+      n: "interfaceLanguage"
+      r: false
+      sh: "Set preferred language for the booking interface."
+      t: "`$STRING`"
+    }
+    isInstantEvent: {
+      h: "Is Instant Event"
+      n: "isInstantEvent"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    lengthInMinutes: {
+      h: "Length In Minutes"
+      n: "lengthInMinutes"
+      op: {
+        update: {
+          req: false
+          type: "`$NUMBER`"
+        }
+      }
+      r: true
+      t: "`$NUMBER`"
+    }
+    lengthInMinutesOptions: {
+      h: "Length In Minutes Options"
+      n: "lengthInMinutesOptions"
+      r: false
+      sh: "If you want that user can choose between different lengths of the event you can specify them here."
+      t: "`$ARRAY`"
+    }
+    locations: {
+      h: "Locations"
+      n: "locations"
+      op: {
+        list: {
+          req: true
+          type: "`$ARRAY`"
+        }
+        update: {
+          req: true
+          type: "`$ARRAY`"
+        }
+      }
+      r: false
+      sh: "Locations where the event will take place."
+      t: "`$ARRAY`"
+      union: {
+        branches: 7
+        count: 1
+        depth: 1
+      }
+    }
+    lockTimeZoneToggleOnBookingPage: {
+      h: "Lock Time Zone Toggle On Booking Page"
+      n: "lockTimeZoneToggleOnBookingPage"
+      op: {
+        list: {
+          req: true
+          type: "`$BOOLEAN`"
+        }
+        update: {
+          req: true
+          type: "`$BOOLEAN`"
+        }
+      }
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    metadata: {
+      h: "Metadata"
+      n: "metadata"
+      r: true
+      t: "`$OBJECT`"
+    }
+    minimumBookingNotice: {
+      h: "Minimum Booking Notice"
+      n: "minimumBookingNotice"
+      r: false
+      sh: "Minimum number of minutes before the event that a booking can be made."
+      t: "`$NUMBER`"
+    }
+    offsetStart: {
+      h: "Offset Start"
+      n: "offsetStart"
+      r: false
+      sh: "Offset timeslots shown to bookers by a specified number of minutes"
+      t: "`$NUMBER`"
+    }
+    onlyShowFirstAvailableSlot: {
+      h: "Only Show First Available Slot"
+      n: "onlyShowFirstAvailableSlot"
+      r: false
+      sh: "This will limit your availability for this event type to one slot per day, scheduled at the earliest available time."
+      t: "`$BOOLEAN`"
+    }
+    ownerId: {
+      h: "Owner Id"
+      n: "ownerId"
+      r: true
+      t: "`$NUMBER`"
+    }
+    price: {
+      h: "Price"
+      n: "price"
+      r: true
+      t: "`$NUMBER`"
+    }
+    recurrence: {
+      h: "Recurrence"
+      n: "recurrence"
+      op: {
+        list: {
+          req: true
+          type: "`$ANY`"
+        }
+        update: {
+          req: true
+          type: "`$ANY`"
+        }
+      }
+      r: false
+      sh: "Create a recurring event type."
+      t: "`$ANY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 0
+      }
+    }
+    requiresBookerEmailVerification: {
+      h: "Requires Booker Email Verification"
+      n: "requiresBookerEmailVerification"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    scheduleId: {
+      h: "Schedule Id"
+      n: "scheduleId"
+      op: {
+        list: {
+          req: true
+          type: "`$NUMBER`"
+        }
+        update: {
+          req: true
+          type: "`$NUMBER`"
+        }
+      }
+      r: false
+      sh: "If you want that this event has different schedule than user's default one you can specify it here."
+      t: "`$NUMBER`"
+    }
+    seats: {
+      h: "Seats"
+      n: "seats"
+      op: {
+        list: {
+          req: true
+          type: "`$OBJECT`"
+        }
+        update: {
+          req: true
+          type: "`$OBJECT`"
+        }
+      }
+      r: false
+      sh: "Create an event type with multiple seats."
+      t: "`$ANY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 0
+      }
+    }
+    seatsPerTimeSlot: {
+      h: "Seats Per Time Slot"
+      n: "seatsPerTimeSlot"
+      r: false
+      t: "`$OBJECT`"
+    }
+    seatsShowAvailabilityCount: {
+      h: "Seats Show Availability Count"
+      n: "seatsShowAvailabilityCount"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    showOptimizedSlots: {
+      h: "Show Optimized Slots"
+      n: "showOptimizedSlots"
+      r: false
+      sh: "Arrange time slots to optimize availability."
+      t: "`$BOOLEAN`"
+    }
+    slotInterval: {
+      h: "Slot Interval"
+      n: "slotInterval"
+      r: false
+      sh: "Number representing length of each slot when event is booked."
+      t: "`$NUMBER`"
+    }
+    slug: {
+      h: "Slug"
+      n: "slug"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    successRedirectUrl: {
+      h: "Success Redirect Url"
+      n: "successRedirectUrl"
+      op: {
+        list: {
+          req: true
+          type: "`$OBJECT`"
+        }
+        update: {
+          req: true
+          type: "`$OBJECT`"
+        }
+      }
+      r: false
+      sh: "A valid URL where the booker will redirect to, once the booking is completed successfully"
+      t: "`$STRING`"
+    }
+    title: {
+      h: "Title"
+      n: "title"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    useDestinationCalendarEmail: {
+      h: "Use Destination Calendar Email"
+      n: "useDestinationCalendarEmail"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    users: {
+      h: "Users"
+      n: "users"
+      r: true
+      t: "`$ARRAY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "event_type"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v2/event-types"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-06-14"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v2/event-types"
+          q: {
+            exist: [
+              "authorization"
+              "cal_api_version"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "event-types"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/event-types"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-06-14"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "x_cal_client_id"
+                or: "x-cal-client-id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "header"
+                n: "x_cal_secret_key"
+                or: "x-cal-secret-key"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "event_slug"
+                or: "eventSlug"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "org_id"
+                or: "orgId"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "org_slug"
+                or: "orgSlug"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "sort_created_at"
+                or: "sortCreatedAt"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "username"
+                or: "username"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "username"
+                or: "usernames"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/event-types"
+          q: {
+            exist: [
+              "cal_api_version"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "event-types"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/event-types/{eventTypeId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-06-14"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "eventTypeId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/event-types/{eventTypeId}"
+          q: {
+            exist: [
+              "authorization"
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              eventTypeId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "event-types"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v2/event-types/{eventTypeId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-06-14"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "eventTypeId"
+                r: true
+                t: "`$NUMBER`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v2/event-types/{eventTypeId}"
+          q: {
+            exist: [
+              "authorization"
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              eventTypeId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "event-types"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /v2/event-types/{eventTypeId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-06-14"
+                k: "header"
+                n: "cal_api_version"
+                or: "cal-api-version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "eventTypeId"
+                r: true
+                t: "`$NUMBER`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v2/event-types/{eventTypeId}"
+          q: {
+            exist: [
+              "authorization"
+              "cal_api_version"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              eventTypeId: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "event-types"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

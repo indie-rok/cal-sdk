@@ -1,0 +1,46 @@
+{
+  "existing": {
+    "stripe": {
+      "STRIPE00": {
+        "authUrl": "s14",
+        "url": "s15",
+        "id": "STRIPE00"
+      },
+      "STRIPE01": {
+        "authUrl": "s28",
+        "url": "s29",
+        "id": "STRIPE01"
+      },
+      "STRIPE02": {
+        "authUrl": "s3c",
+        "url": "s3d",
+        "id": "STRIPE02"
+      }
+    }
+  },
+  "new": {
+    "stripe": {
+      "stripe_ref01": {
+        "authUrl": "s50",
+        "url": "s51"
+      }
+    }
+  },
+  "requests": {
+    "GET /v2/stripe/save": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/stripe/check": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/stripe/connect": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

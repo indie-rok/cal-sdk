@@ -1,0 +1,118 @@
+# BasicManagedUserFlow
+
+main: kit: flow: BasicManagedUserFlow:
+{
+  entity: "managed_user",
+  kind: "basic",
+  name: "BasicManagedUserFlow",
+  step: [
+    {
+      i: {
+        ref: "managed_user_ref01"
+      }
+
+      m: {
+        oauth_client_id: "oauth_client01"
+      }
+
+      o: "create"
+    }
+
+    {
+      m: {
+        oauth_client_id: "oauth_client01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "managed_user_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      d: {
+        oauth_client_id: "oauth_client01"
+      }
+
+      i: {
+        ref: "managed_user_ref01",
+        srcdatavar: "managed_user_ref01_data",
+        suffix: "_up0",
+        textfield: "avatarUrl"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-managed_user_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "managed_user_ref01",
+        srcdatavar: "managed_user_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "managed_user01",
+        oauth_client_id: "oauth_client01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-managed_user_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "managed_user_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "managed_user01",
+        oauth_client_id: "oauth_client01"
+      }
+
+      o: "remove"
+    }
+
+    {
+      i: {
+        suffix: "_rt0"
+      }
+
+      m: {
+        oauth_client_id: "oauth_client01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "managed_user_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicManagedUserFlow"
+}

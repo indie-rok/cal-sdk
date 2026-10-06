@@ -1,0 +1,29 @@
+# BasicDestinationCalendarFlow
+
+main: kit: flow: BasicDestinationCalendarFlow:
+{
+  entity: "destination_calendar",
+  kind: "basic",
+  name: "BasicDestinationCalendarFlow",
+  step: [
+    {
+      i: {
+        ref: "destination_calendar_ref01",
+        srcdatavar: "destination_calendar_ref01_data",
+        suffix: "_up0",
+        textfield: "delegationCredentialId"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-destination_calendar_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicDestinationCalendarFlow"
+}

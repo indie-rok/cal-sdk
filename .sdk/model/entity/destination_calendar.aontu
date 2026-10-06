@@ -1,0 +1,94 @@
+# Entity: destination_calendar
+
+main: kit: entity: destination_calendar: {
+
+  alias: field: {}
+
+  fields: {
+    credentialId: {
+      h: "Credential Id"
+      n: "credentialId"
+      r: true
+      t: "`$NUMBER`"
+    }
+    delegationCredentialId: {
+      h: "Delegation Credential Id"
+      n: "delegationCredentialId"
+      r: false
+      t: "`$STRING`"
+    }
+    externalId: {
+      h: "External Id"
+      n: "externalId"
+      r: true
+      sh: "Unique identifier used to represent the specific calendar, as returned by the /calendars endpoint"
+      t: "`$STRING`"
+    }
+    integration: {
+      h: "Integration"
+      n: "integration"
+      r: true
+      sh: "The calendar service you want to integrate, as returned by the /calendars endpoint"
+      t: "`$STRING`"
+    }
+    userId: {
+      h: "User Id"
+      n: "userId"
+      r: true
+      t: "`$NUMBER`"
+    }
+  }
+
+  name: "destination_calendar"
+  op: {
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PUT /v2/destination-calendars"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "Authorization"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/v2/destination-calendars"
+          q: {
+            exist: [
+              "authorization"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "destination-calendars"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

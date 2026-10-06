@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "slot": {
+      "SLOT00": {
+        "id": "SLOT00"
+      },
+      "SLOT01": {
+        "id": "SLOT01"
+      },
+      "SLOT02": {
+        "id": "SLOT02"
+      }
+    }
+  },
+  "new": {
+    "slot": {
+      "slot_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /v2/slots": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

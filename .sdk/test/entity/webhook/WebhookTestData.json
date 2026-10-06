@@ -1,0 +1,76 @@
+{
+  "existing": {
+    "webhook": {
+      "WEBHOOK00": {
+        "active": true,
+        "id": "WEBHOOK00",
+        "payloadTemplate": "s52",
+        "secret": "s53",
+        "subscriberUrl": "s54",
+        "triggers": [],
+        "userId": 86,
+        "version": "s57"
+      },
+      "WEBHOOK01": {
+        "active": true,
+        "id": "WEBHOOK01",
+        "payloadTemplate": "sa2",
+        "secret": "sa3",
+        "subscriberUrl": "sa4",
+        "triggers": [],
+        "userId": 166,
+        "version": "sa7"
+      },
+      "WEBHOOK02": {
+        "active": true,
+        "id": "WEBHOOK02",
+        "payloadTemplate": "sf2",
+        "secret": "sf3",
+        "subscriberUrl": "sf4",
+        "triggers": [],
+        "userId": 246,
+        "version": "sf7"
+      }
+    }
+  },
+  "new": {
+    "webhook": {
+      "webhook_ref01": {
+        "active": true,
+        "payloadTemplate": "s142",
+        "secret": "s143",
+        "subscriberUrl": "s144",
+        "triggers": [],
+        "userId": 326,
+        "version": "s147"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/webhooks": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/webhooks": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/webhooks/{webhookId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /v2/webhooks/{webhookId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /v2/webhooks/{webhookId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

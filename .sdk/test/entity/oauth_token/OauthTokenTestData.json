@@ -1,0 +1,63 @@
+{
+  "existing": {
+    "oauth_token": {
+      "OAUTH_TOKEN00": {
+        "access_token": "s28",
+        "expires_in": 41,
+        "refresh_token": "s2a",
+        "token_type": "s2b",
+        "oauth_client_id": "OAUTH_CLIENT01",
+        "user_id": "USER01",
+        "oauth_id": "OAUTH01",
+        "id": "OAUTH_TOKEN00"
+      },
+      "OAUTH_TOKEN01": {
+        "access_token": "s50",
+        "expires_in": 81,
+        "refresh_token": "s52",
+        "token_type": "s53",
+        "oauth_client_id": "OAUTH_CLIENT01",
+        "user_id": "USER01",
+        "oauth_id": "OAUTH01",
+        "id": "OAUTH_TOKEN01"
+      },
+      "OAUTH_TOKEN02": {
+        "access_token": "s78",
+        "expires_in": 121,
+        "refresh_token": "s7a",
+        "token_type": "s7b",
+        "oauth_client_id": "OAUTH_CLIENT01",
+        "user_id": "USER01",
+        "oauth_id": "OAUTH01",
+        "id": "OAUTH_TOKEN02"
+      }
+    }
+  },
+  "new": {
+    "oauth_token": {
+      "oauth_token_ref01": {
+        "access_token": "sa0",
+        "expires_in": 161,
+        "refresh_token": "sa2",
+        "token_type": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/oauth-clients/{clientId}/users/{userId}/force-refresh": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/oauth/{clientId}/refresh": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/auth/oauth2/token": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

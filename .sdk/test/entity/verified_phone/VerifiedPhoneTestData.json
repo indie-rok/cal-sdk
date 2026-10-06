@@ -1,0 +1,51 @@
+{
+  "existing": {
+    "verified_phone": {
+      "VERIFIED_PHONE00": {
+        "id": "VERIFIED_PHONE00",
+        "phoneNumber": "s1f",
+        "userId": 32
+      },
+      "VERIFIED_PHONE01": {
+        "id": "VERIFIED_PHONE01",
+        "phoneNumber": "s3d",
+        "userId": 62
+      },
+      "VERIFIED_PHONE02": {
+        "id": "VERIFIED_PHONE02",
+        "phoneNumber": "s5b",
+        "userId": 92
+      }
+    }
+  },
+  "new": {
+    "verified_phone": {
+      "verified_phone_ref01": {
+        "phoneNumber": "s79",
+        "userId": 122
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/verified-resources/phones/verification-code/request": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /v2/verified-resources/phones/verification-code/verify": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/verified-resources/phones": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /v2/verified-resources/phones/{id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}
